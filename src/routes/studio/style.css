@@ -1,0 +1,55 @@
+:root {
+    --navbar-height: 60px;
+    --page_max_height: calc(100vh - var(--navbar-height) - 2px);
+    --visible_border: 1px solid rgb(237, 234, 234);
+}
+
+
+.layout {
+    width: 100%;
+    background-color: #fbfbfb;
+}
+
+.nav {
+    width: 100%;
+    height: var(--navbar-height);
+    background-color: rgb(255, 255, 255);
+    border-bottom: var(--visible_border);
+}
+
+
+.page {
+    width: 100%;
+    height: var(--page_max_height);
+    display: flex;
+}
+
+.page_pane_selection_sidebar {
+    width: 60px;
+    height: var(--page_max_height);
+    background-color: white;
+    border-right: var(--visible_border);
+}
+
+.page_attribute_sidebar {
+    width: 280px;
+    height: var(--page_max_height);
+    background-color: white;
+    border-right: var(--visible_border);
+}
+
+
+.page_canvas {
+    width: calc(100% - 60px - 280px);
+    height: var(--page_max_height);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .canvas_holder {
+    width: 10000px;
+    height: 10000px;
+    background-color: transparent;
+    position: absolute;
+    cursor: move;
+  }
