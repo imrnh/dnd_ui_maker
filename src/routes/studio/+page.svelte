@@ -1,4 +1,11 @@
 <script>
+    import CanvasMiniButtons from "$lib/components/canvas/canvas_mini_buttons.svelte";
+
+    import gallary_icon from "$lib/assets/icons/gallery.png";
+    import ui_design_icon from "$lib/assets/icons/ui_design.png";
+    import action_components_icon from "$lib/assets/icons/web-development.png";
+    import settings_icon from "$lib/assets/icons/setting-lines.png";
+
     let isDragging_INNER_CANVAS = false;
     let startX_INNER_CANVAS = 0,
         startY_INNER_CANVAS = 0,
@@ -26,22 +33,81 @@
         isDragging_INNER_CANVAS = false;
     }
 
-    //dyanamic phone styling.
+    //dyanamic phone styling. this will be then inside page object. Right now, this is templaing.
     let uiDesignCanvasDynamicSize = {
         width: "330px",
         height: "790px",
+        "background-color": "orange",
     };
 
-    $: uiDesignCanvasDynamicSizeString = Object.entries(uiDesignCanvasDynamicSize).map(([key, value]) => `${key}: ${value}`).join("; ");
+    $: uiDesignCanvasDynamicSizeString = Object.entries(
+        uiDesignCanvasDynamicSize
+    )
+        .map(([key, value]) => `${key}: ${value}`)
+        .join("; ");
 
     //a demo function on how to change the size of the screen.
     const changeSize = () => {
-        uiDesignCanvasDynamicSize.width = "700px";
+        uiDesignCanvasDynamicSize["width"] = "700px";
+        uiDesignCanvasDynamicSize["height"] = "1100px";
+    };
+
+    const viewMediaTab = () => {
+        console.log("Trying to view media tab");
     };
 </script>
 
 <div class="page">
-    <div class="page_pane_selection_sidebar" />
+    <div class="page_pane_selection_sidebar">
+        <CanvasMiniButtons
+            button_name="Templates"
+            image={gallary_icon}
+            button_function={viewMediaTab}
+        />
+
+        <CanvasMiniButtons
+            button_name="Elements"
+            image={ui_design_icon}
+            button_function={viewMediaTab}
+        />
+
+        <!-- variables -->
+        <CanvasMiniButtons
+            button_name="Variables"
+            image={action_components_icon}
+            button_function={viewMediaTab}
+        />
+
+        <CanvasMiniButtons
+            button_name="Media"
+            image={gallary_icon}
+            button_function={viewMediaTab}
+        />
+
+        <CanvasMiniButtons
+            button_name="Structure"
+            image={action_components_icon}
+            button_function={viewMediaTab}
+        />
+
+        <CanvasMiniButtons
+            button_name="Actions"
+            image={action_components_icon}
+            button_function={viewMediaTab}
+        />
+
+        <CanvasMiniButtons
+            button_name="Extension"
+            image={gallary_icon}
+            button_function={viewMediaTab}
+        />
+
+        <CanvasMiniButtons
+            button_name="Settings"
+            image={settings_icon}
+            button_function={viewMediaTab}
+        />
+    </div>
     <div class="page_attribute_sidebar" />
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="page_canvas">
@@ -52,8 +118,6 @@
             on:mouseup={handleMouseUp_INNER_CANVAS}
             on:mouseleave={handleMouseUp_INNER_CANVAS}
         >
-            Content goes here.
-
             <div
                 class="ui_design_canvas"
                 style={uiDesignCanvasDynamicSizeString}
@@ -61,8 +125,6 @@
                 fasdfasdf
             </div>
         </div>
-
-        <div class="inner_canvas_buttons">few button will go here</div>
     </div>
 </div>
 
