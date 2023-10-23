@@ -25,6 +25,19 @@
     function handleMouseUp_INNER_CANVAS() {
         isDragging_INNER_CANVAS = false;
     }
+
+    //dyanamic phone styling.
+    let uiDesignCanvasDynamicSize = {
+        width: "330px",
+        height: "790px",
+    };
+
+    $: uiDesignCanvasDynamicSizeString = Object.entries(uiDesignCanvasDynamicSize).map(([key, value]) => `${key}: ${value}`).join("; ");
+
+    //a demo function on how to change the size of the screen.
+    const changeSize = () => {
+        uiDesignCanvasDynamicSize.width = "700px";
+    };
 </script>
 
 <div class="page">
@@ -41,14 +54,15 @@
         >
             Content goes here.
 
-            <div class="ui_design_canvas">
-
+            <div
+                class="ui_design_canvas"
+                style={uiDesignCanvasDynamicSizeString}
+            >
+                fasdfasdf
             </div>
         </div>
 
-        <div class="inner_canvas_buttons">
-            few button will go here
-        </div>
+        <div class="inner_canvas_buttons">few button will go here</div>
     </div>
 </div>
 

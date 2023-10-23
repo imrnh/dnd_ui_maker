@@ -1,5 +1,5 @@
 :root {
-    --navbar-height: 60px;
+    --navbar-height: 55px;
     --page_max_height: calc(100vh - var(--navbar-height) - 2px);
     --visible_border: 1px solid rgb(237, 234, 234);
 }
@@ -65,7 +65,9 @@
 
 
 .ui_design_canvas{
-    width: 330px;
-    height: 900px;
-    background-color: green;
+
+    background-color: rebeccapurple;
+    position: absolute;
+    left: 200px;
+    top: 120px;
 }
