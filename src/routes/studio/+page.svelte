@@ -17,8 +17,8 @@
         startY_INNER_CANVAS = event.clientY - initialY_INNER_CANVAS;
         const canvasHolder = document.querySelector(".canvas_holder");
 
-        if (startX_INNER_CANVAS <= 0) startX_INNER_CANVAS = 0;
-        if (startY_INNER_CANVAS <= 0) startY_INNER_CANVAS = 0;
+        if (startX_INNER_CANVAS >= 0) startX_INNER_CANVAS = 0;
+        if (startY_INNER_CANVAS >= 0) startY_INNER_CANVAS = 0;
         canvasHolder.style.transform = `translate(${startX_INNER_CANVAS}px, ${startY_INNER_CANVAS}px)`;
     }
 
@@ -40,6 +40,14 @@
             on:mouseleave={handleMouseUp_INNER_CANVAS}
         >
             Content goes here.
+
+            <div class="ui_design_canvas">
+
+            </div>
+        </div>
+
+        <div class="inner_canvas_buttons">
+            few button will go here
         </div>
     </div>
 </div>
