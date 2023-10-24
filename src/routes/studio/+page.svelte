@@ -5,6 +5,9 @@
     import ui_design_icon from "$lib/assets/icons/ui_design.png";
     import action_components_icon from "$lib/assets/icons/web-development.png";
     import settings_icon from "$lib/assets/icons/setting-lines.png";
+    import layout_icon from "$lib/assets/icons/layout.png";
+    import hierarchy_icon from "$lib/assets/icons/hierarchy.png";
+    import variable_icon from "$lib/assets/icons/variables.png";
 
     let isDragging_INNER_CANVAS = false;
     let startX_INNER_CANVAS = 0,
@@ -61,7 +64,7 @@
     <div class="page_pane_selection_sidebar">
         <CanvasMiniButtons
             button_name="Templates"
-            image={gallary_icon}
+            image={layout_icon}
             button_function={viewMediaTab}
         />
 
@@ -74,7 +77,7 @@
         <!-- variables -->
         <CanvasMiniButtons
             button_name="Variables"
-            image={action_components_icon}
+            image={variable_icon}
             button_function={viewMediaTab}
         />
 
@@ -86,7 +89,7 @@
 
         <CanvasMiniButtons
             button_name="Structure"
-            image={action_components_icon}
+            image={hierarchy_icon}
             button_function={viewMediaTab}
         />
 

@@ -27,7 +27,7 @@
 .page_pane_selection_sidebar {
     width: 70px;
     height: var(--page_max_height);
-    background-color: rgb(85, 79, 79);
+    background-color: rgb(255, 255, 255);
     border-right: var(--visible_border);
     display: flex;
     flex-direction: column;
