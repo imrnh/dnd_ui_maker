@@ -7,7 +7,6 @@
     let isUICompActive = true; //default this one will be active.
 
     let filterText = "";
-    let visibleComponents;
 
     function updateFilterText(e: any) {
         filterText = e.target.value;
