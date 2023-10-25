@@ -1,13 +1,5 @@
 <script>
-    import CanvasMiniButtons from "$lib/components/canvas/canvas_mini_buttons.svelte";
-
-    import gallary_icon from "$lib/assets/icons/gallery.png";
-    import ui_design_icon from "$lib/assets/icons/ui_design.png";
-    import action_components_icon from "$lib/assets/icons/web-development.png";
-    import settings_icon from "$lib/assets/icons/setting-lines.png";
-    import layout_icon from "$lib/assets/icons/layout.png";
-    import hierarchy_icon from "$lib/assets/icons/hierarchy.png";
-    import variable_icon from "$lib/assets/icons/variables.png";
+    import Sidebar from "$lib/components/studio/sidebar/sidebar.svelte";
 
     let isDragging_INNER_CANVAS = false;
     let startX_INNER_CANVAS = 0,
@@ -40,7 +32,6 @@
     let uiDesignCanvasDynamicSize = {
         width: "330px",
         height: "790px",
-        "background-color": "orange",
     };
 
     $: uiDesignCanvasDynamicSizeString = Object.entries(
@@ -54,64 +45,12 @@
         uiDesignCanvasDynamicSize["width"] = "700px";
         uiDesignCanvasDynamicSize["height"] = "1100px";
     };
-
-    const viewMediaTab = () => {
-        console.log("Trying to view media tab");
-    };
 </script>
 
 <div class="page">
-    <div class="page_pane_selection_sidebar">
-        <CanvasMiniButtons
-            button_name="Templates"
-            image={layout_icon}
-            button_function={viewMediaTab}
-        />
-
-        <CanvasMiniButtons
-            button_name="Elements"
-            image={ui_design_icon}
-            button_function={viewMediaTab}
-        />
-
-        <!-- variables -->
-        <CanvasMiniButtons
-            button_name="Variables"
-            image={variable_icon}
-            button_function={viewMediaTab}
-        />
-
-        <CanvasMiniButtons
-            button_name="Media"
-            image={gallary_icon}
-            button_function={viewMediaTab}
-        />
-
-        <CanvasMiniButtons
-            button_name="Structure"
-            image={hierarchy_icon}
-            button_function={viewMediaTab}
-        />
-
-        <CanvasMiniButtons
-            button_name="Actions"
-            image={action_components_icon}
-            button_function={viewMediaTab}
-        />
-
-        <CanvasMiniButtons
-            button_name="Extension"
-            image={gallary_icon}
-            button_function={viewMediaTab}
-        />
-
-        <CanvasMiniButtons
-            button_name="Settings"
-            image={settings_icon}
-            button_function={viewMediaTab}
-        />
+    <div class="sidebar">
+        <Sidebar />
     </div>
-    <div class="page_attribute_sidebar" />
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="page_canvas">
         <div

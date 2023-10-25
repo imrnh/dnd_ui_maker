@@ -58,7 +58,7 @@
     cursor: move;
 }
 
-.inner_canvas_buttons{
+.inner_canvas_buttons {
     width: 300px;
     height: 40px;
     background-color: gainsboro;
@@ -68,7 +68,7 @@
 }
 
 
-.ui_design_canvas{
+.ui_design_canvas {
     position: absolute;
     left: 200px;
     top: 120px;
