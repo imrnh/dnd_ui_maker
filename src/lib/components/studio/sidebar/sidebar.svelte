@@ -9,8 +9,9 @@
     import CanvasMiniButtons from "../canvas/canvas_mini_buttons.svelte";
     import TemplatesSidebar from "./design_components_sidebar.svelte";
     import DesignComponentsSidebar from "./design_components_sidebar.svelte";
-    import TemplatesTab from "./templates_tab.svelte";
+    import TemplatesTab from "./templates_bar/templates_tab.svelte";
     import { onMount } from "svelte";
+    import VariableSidebar from "./variables_bar/variable_sidebar.svelte";
 
     let vWindow = 0;
 
@@ -118,6 +119,9 @@
             <TemplatesTab />
         {:else if vWindow == 1}
             <DesignComponentsSidebar />
+
+        {:else if vWindow == 3}
+            <VariableSidebar />
         {/if}
     </div>
 </div>

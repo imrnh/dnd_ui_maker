@@ -45,12 +45,12 @@
     border-radius: 5px;
     height: 35px;
     background-color: transparent;
-    border: 1px solid rgb(115, 115, 115);
+    border: 1px solid #909cc4;
     transition: 100ms;
     font-size: 14px;
     padding-left: 10px;
     margin-left: -10px;
-    color: black;
+    color: #909cc4;
 }
 
 .search_box:focus {
