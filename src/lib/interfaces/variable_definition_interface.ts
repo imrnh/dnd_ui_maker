@@ -13,6 +13,6 @@ export enum VariableType {
     checkbox = "checkbox",
     color = "color",
     list = "list", //array
-    named_list = "named_list", //dictionary in python
+    key_value_list = "key-value_list", //dictionary in python
     list_of_named_list = "list_of_named_list" //object of object
 }

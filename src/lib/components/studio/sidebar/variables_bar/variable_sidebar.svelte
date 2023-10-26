@@ -47,7 +47,7 @@
 
     {#if vcpVisible}
     <br>
-        <VarialbeCreationPane callback={varCreationCallback} />
+        <VarialbeCreationPane callback={varCreationCallback} variableKeyPosition = {0}/>
     {/if}
 </div>
 
