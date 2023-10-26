@@ -16,9 +16,17 @@
 		"@types/cookie": "^0.5.1",
 		"svelte": "^4.0.5",
 		"svelte-check": "^3.4.3",
+		"svelte-fa": "^3.0.4",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
 		"vite": "^4.4.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^6.4.2",
+		"@fortawesome/free-brands-svg-icons": "^6.4.2",
+		"@fortawesome/free-solid-svg-icons": "^6.4.2",
+		"@fortawesome/svelte-fontawesome": "^0.2.0",
+		"svelte-fontawesome": "^0.0.3"
+	}
 }

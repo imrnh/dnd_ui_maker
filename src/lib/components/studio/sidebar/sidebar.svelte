@@ -10,38 +10,73 @@
     import TemplatesSidebar from "./design_components_sidebar.svelte";
     import DesignComponentsSidebar from "./design_components_sidebar.svelte";
     import TemplatesTab from "./templates_tab.svelte";
+    import { onMount } from "svelte";
 
     let vWindow = 0;
+
+    function setVWToCookie() {
+        const cookieName = "sidebarCurrTab";
+        const cookieValue = vWindow.toString();
+        const expirationDays = 30;
+
+        const d = new Date();
+        d.setTime(d.getTime() + expirationDays * 24 * 60 * 60 * 1000);
+        const expires = "expires=" + d.toUTCString();
+
+        document.cookie = `${cookieName}=${cookieValue};${expires};path=/`;
+    }
+
+    function readCookie() {
+        const cookieName = "sidebarCurrTab";
+        const cookies = document.cookie.split(";");
+
+        for (const cookie of cookies) {
+            const [name, value] = cookie.trim().split("=");
+
+            if (name === cookieName) {
+                vWindow = parseInt(decodeURIComponent(value));
+                break;
+            }
+        }
+    }
+
+    onMount(() => {
+        readCookie();
+    });
 </script>
 
 <div class="sidebar_wrapper">
     <div class="sidebar_toggler_buttons_wrapper">
         <CanvasMiniButtons
-            button_name="Templates"
+            button_name="Template"
             image={layout_icon}
             button_function={() => {
                 vWindow = 0;
+                setVWToCookie();
             }}
         />
         <CanvasMiniButtons
-            button_name="Elements"
+            button_name="Element"
             image={ui_design_icon}
             button_function={() => {
                 vWindow = 1;
-            }}
-        />
-        <CanvasMiniButtons
-            button_name="Variables"
-            image={variable_icon}
-            button_function={() => {
-                vWindow = 2;
+                setVWToCookie();
             }}
         />
         <CanvasMiniButtons
             button_name="Media"
             image={gallary_icon}
             button_function={() => {
+                vWindow = 2;
+                setVWToCookie();
+            }}
+        />
+        <CanvasMiniButtons
+            button_name="Variable"
+            image={variable_icon}
+            button_function={() => {
                 vWindow = 3;
+                setVWToCookie();
             }}
         />
         <CanvasMiniButtons
@@ -49,13 +84,15 @@
             image={hierarchy_icon}
             button_function={() => {
                 vWindow = 4;
+                setVWToCookie();
             }}
         />
         <CanvasMiniButtons
-            button_name="Actions"
+            button_name="Action"
             image={action_components_icon}
             button_function={() => {
                 vWindow = 5;
+                setVWToCookie();
             }}
         />
         <CanvasMiniButtons
@@ -63,13 +100,15 @@
             image={gallary_icon}
             button_function={() => {
                 vWindow = 6;
+                setVWToCookie();
             }}
         />
         <CanvasMiniButtons
-            button_name="Settings"
+            button_name="Setting"
             image={settings_icon}
             button_function={() => {
                 vWindow = 7;
+                setVWToCookie();
             }}
         />
     </div>

@@ -1,11 +1,11 @@
 .sidebar_wrapper {
-    width: calc(70px + 280px);
+    width: calc(60px + 280px);
     height: auto;
     display: flex;
 }
 
 .sidebar_toggler_buttons_wrapper {
-    width: 70px;
+    width: 60px;
     height: var(--page_max_height);
     background-color: rgb(255, 255, 255);
     border-right: var(--visible_border);

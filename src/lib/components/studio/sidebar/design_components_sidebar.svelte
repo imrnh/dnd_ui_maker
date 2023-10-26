@@ -1,8 +1,8 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import CompButton from "./comp_buttons/comp_button.svelte";
-    import designComponentList, { type IUIComponent } from "$lib/utilities/design_components_list";
-    import functionComponentList from "$lib/utilities/function_componetns_list";
+    import designComponentList, { type IUIComponent } from "$lib/api/studio/comp_list/design_components_list";
+    import functionComponentList from "$lib/api/studio/comp_list/function_componetns_list";
 
     let isUICompActive = true; //default this one will be active.
 

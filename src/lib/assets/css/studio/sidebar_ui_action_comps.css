@@ -69,17 +69,12 @@
     flex-wrap: wrap;
     position: absolute;
     margin-top: 60px;
-
     scrollbar-width: thin;
-    /* "auto" hides scrollbar, "thin" shows a thinner scrollbar */
     scrollbar-color: #979393 #666;
-    /* thumb color and track color */
 }
 
-/* Custom scrollbar styles for Webkit browsers (Chrome, Safari) */
 .components_viewer_sidewindow::-webkit-scrollbar {
     width: 6px;
-    /* Set the width of the scrollbar */
 }
 
 .components_viewer_sidewindow::-webkit-scrollbar-thumb {
@@ -89,8 +84,5 @@
 }
 
 .components_viewer_sidewindow::-webkit-scrollbar-track {
-    background: rgb(190,
-            190,
-            190);
-    /* Set the color of the scrollbar track */
+    background: rgb(190, 190, 190);
 }

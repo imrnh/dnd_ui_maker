@@ -30,8 +30,8 @@
     }
 
     .icon {
-        width: 20px;
-        height: 20px;
+        width: 17px;
+        height: 17px;
     }
 
     .name {
