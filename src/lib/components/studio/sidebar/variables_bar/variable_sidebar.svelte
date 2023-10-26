@@ -1,6 +1,7 @@
 <script lang="ts">
     import type IVariable from "$lib/interfaces/variable_definition_interface";
     import { VariableType } from "$lib/interfaces/variable_definition_interface";
+    import { faL } from "@fortawesome/free-solid-svg-icons";
     import VariableAccordion from "./variable_accordion.svelte";
     import VarialbeCreationPane from "./varialbe_creation_pane.svelte";
 
@@ -18,12 +19,24 @@
             value: 9968916751,
         },
     ];
+
+    let vcpVisible = false;
+    function createNewVar() {
+        vcpVisible = true;
+    }
+
+    function varCreationCallback(vname: string, vtype: VariableType, vvalue: any){
+
+        //check the length and type before inserting.
+
+        vcpVisible = false;
+    }
 </script>
 
 <div class="variable_sidebar">
     <div class="vs_header">
         <h3>Variables</h3>
-        <button class="add_new_var"> + &nbsp;New </button>
+        <button on:click={createNewVar} class="add_new_var"> + &nbsp;New </button>
     </div>
 
     <div style="height:30px;" />
@@ -32,7 +45,10 @@
         <VariableAccordion vname={variable.name} vvalue={variable.value} vtype={variable.type} />
     {/each}
 
-    <!-- <VarialbeCreationPane /> -->
+    {#if vcpVisible}
+    <br>
+        <VarialbeCreationPane callback={varCreationCallback} />
+    {/if}
 </div>
 
 <style>

@@ -37,6 +37,8 @@
 <div class="vupdate_pane_wrapper">
     <br />
     <input type="text" class="vname" placeholder="Vraiable name" value={vname} />
+
+    <label class="select_v_type_label">Variable type</label>
     <select name="var_type_selector" class="vtype">
         <option value="">Select a type</option>
         {#each varTypeArray as var_t, index}
@@ -87,5 +89,12 @@
     select:focus,
     button:focus {
         outline: none;
+    }
+
+    .select_v_type_label {
+        margin-left: 15px;
+        font-size: 13px;
+        color: white;
+        margin-top: 5px;
     }
 </style>
