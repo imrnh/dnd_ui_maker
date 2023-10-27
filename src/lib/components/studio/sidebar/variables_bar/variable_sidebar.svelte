@@ -1,7 +1,6 @@
 <script lang="ts">
     import type IVariable from "$lib/interfaces/variable_definition_interface";
     import { VariableType } from "$lib/interfaces/variable_definition_interface";
-    import { faL } from "@fortawesome/free-solid-svg-icons";
     import VariableAccordion from "./variable_accordion.svelte";
     import VarialbeCreationPane from "./varialbe_creation_pane.svelte";
 
@@ -25,8 +24,7 @@
         vcpVisible = true;
     }
 
-    function varCreationCallback(vname: string, vtype: VariableType, vvalue: any){
-
+    function varCreationCallback(vname: string, vtype: VariableType, vvalue: any) {
         //check the length and type before inserting.
 
         vcpVisible = false;
@@ -46,8 +44,8 @@
     {/each}
 
     {#if vcpVisible}
-    <br>
-        <VarialbeCreationPane callback={varCreationCallback} variableKeyPosition = {0}/>
+        <br />
+        <VarialbeCreationPane callback={varCreationCallback} variableKeyPosition={0} />
     {/if}
 </div>
 

@@ -7,11 +7,10 @@
     let allowedVarTypeNameArray: string[] = []; //allowed variable types are stored in enum. We converted to array.
     let allowedVarTypeOriginalEnumKeyStr: string[] = [];
     const typeWithSingleField = [VariableType.text, VariableType.number, VariableType.color, VariableType.file];
+    const typeThatMayHaveKeyValPair = [VariableType.key_value_list, VariableType.list];
 
     //show error to input field dynamically.
     let showErrorBorder = { show: false, idx: -1, msg: "Variable name cannot be empty" };
-
-
 
     /**
      * Input field values about the newly created variable user want to create will be assigned in the following variables.
@@ -35,7 +34,7 @@
     function onNameChange(e: any) {
         vNameInput = e.target.value;
 
-        if(isNestedByKeyValueList){
+        if (isNestedByKeyValueList) {
             //then automatically call callback to store the value.
             //this will store the values without submitting the form
             callback(vNameInput, vTypeInput, vValueInput, variableKeyPosition);
@@ -43,13 +42,23 @@
     }
     function onValueChange(e: any, idx: number = 0) {
         vValueInput[idx] = e.target.value;
-         if(isNestedByKeyValueList){
+        if (isNestedByKeyValueList) {
             //then automatically call callback to store the value.
             //this will store the values without submitting the form
             callback(vNameInput, vTypeInput, vValueInput, variableKeyPosition);
         }
     }
     function onSelectChange(e: any) {
+        if (typeThatMayHaveKeyValPair.includes(vTypeInput)) {
+            if (vTypeInput === VariableType.key_value_list) {
+                availableFields = 1;
+                vValueInput = new Array(availableFields).fill(nestedCallbackResult);
+            } else {
+                vValueInput = [];
+                availableFields = 0;
+            }
+        }
+
         if (typeWithSingleField.includes(vTypeInput)) {
             //whenever user switches to fiels with only single value, delete all the other fields and keep just one.
             availableFields = 1;
@@ -121,11 +130,12 @@
     /**
      * add a single field to the values fields.
      */
-    function addOneField() {
-        if (vTypeInput != VariableType.key_value_list) {
+    function addOneField(whatToAdd: boolean = true) {
+        if (whatToAdd) {
             availableFields++;
             vValueInput.push("");
         } else {
+            //what to add : true -> add value. false -> add key.
             availableFields++;
             vValueInput.push(nestedCallbackResult);
         }
@@ -152,8 +162,7 @@
         console.log("Called nested. Pos:", variableKeyPosition);
     }
 
-    console.log("My key position is: ", variableKeyPosition)
-
+    console.log("My key position is: ", variableKeyPosition);
 </script>
 
 <div class="var_creation_pane_wrapper" style={isNestedByKeyValueList ? "background-color: #bec5db" : ""}>
@@ -181,40 +190,45 @@
     </select>
 
     <!-- Values input field -->
-    {#if vTypeInput == VariableType.key_value_list}
-        {#each vValueInput as value, vc_idx}
-        <p>{vc_idx}</p>
+
+    {#each vValueInput as value, vf_index}
+        {#if vValueInput[vf_index] instanceof Object && !Array.isArray(vValueInput[vf_index])}
             <div class="named_list_new_named_var_creation_div">
                 <div style="display: flex; justify-content: space-between;">
                     <p style="font-size: 15px; color: white; padding-left: 10px">Add a new key</p>
                     {#if availableFields > 1}
-                        <button class="delete_field_button" on:click={() => deleteValueField(vc_idx)} style="margin-right: 10px">
+                        <button class="delete_field_button" on:click={() => deleteValueField(vf_index)} style="margin-right: 10px">
                             <FontAwesomeIcon icon={faTrash} />
                         </button>
                     {/if}
                 </div>
 
-                <VarialbeCreationPane callback={callbackToPassToNested} isNestedByKeyValueList={true} variableKeyPosition={vc_idx} />
+                <VarialbeCreationPane callback={callbackToPassToNested} isNestedByKeyValueList={true} variableKeyPosition={vf_index} />
             </div>
-        {/each}
-    {:else}
-        {#each vValueInput as value, vf_index}
+        {:else}
             <div class="value_input_field_holder_div">
                 <input type="text" class="data_field" placeholder="Value" bind:value on:change={(e) => onValueChange(e, vf_index)} style={showErrorBorder.show && showErrorBorder.idx == vf_index + 1 ? "border: 1px solid rgb(220,0,0)" : ""} />
-                {#if availableFields > 1}
-                    <button class="delete_field_button" on:click={() => deleteValueField(vf_index)}>
-                        <FontAwesomeIcon icon={faTrash} />
-                    </button>
-                {/if}
+                <button class="delete_field_button" on:click={() => deleteValueField(vf_index)}>
+                    <FontAwesomeIcon icon={faTrash} />
+                </button>
             </div>
             {#if showErrorBorder.show && showErrorBorder.idx == vf_index + 1}
                 <p class="error_messag">{showErrorBorder.msg}</p>
             {/if}
-        {/each}
-    {/if}
+        {/if}
+    {/each}
 
-    {#if !typeWithSingleField.includes(vTypeInput)}
-        <button class="add_one_more_field_btn" on:click={addOneField}><u>+ add 1 {vTypeInput == VariableType.key_value_list ? "key" : "field"}</u></button> <br />
+    {#if !typeWithSingleField.includes(vTypeInput) || availableFields == 0}
+        {#if vTypeInput === VariableType.list}
+            <div style="display: flex; align-items: center; justify-content: center">
+                <button class="add_one_more_field_btn" on:click={() => addOneField(false)}><u>+ add 1 key</u></button> <br />
+                <button class="add_one_more_field_btn" on:click={() => addOneField(true)}><u>+ add 1 field</u></button> <br />
+            </div>
+        {:else if vTypeInput === VariableType.key_value_list}
+            <button class="add_one_more_field_btn" on:click={() => addOneField(false)}><u>+ add 1 key</u></button> <br />
+        {:else}
+            <button class="add_one_more_field_btn" on:click={() => addOneField(true)}><u>+ add 1 field</u></button> <br />
+        {/if}
     {/if}
 
     {#if !isNestedByKeyValueList}
