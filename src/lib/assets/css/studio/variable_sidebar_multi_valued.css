@@ -1,0 +1,106 @@
+ .svvcp_wrapper {
+     width: 100%;
+     min-height: 40px;
+     background-color: #909cc4;
+     border-radius: 10px;
+     padding-top: 5px;
+     padding-bottom: 15px;
+ }
+
+ .name_type_wrp {
+     width: 90%;
+     height: 30px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-top: 10px;
+ }
+
+ .name_field {
+     /* width: 65%; */
+     width: 100%;
+     height: 28px;
+     border-radius: 10px;
+     border: 0;
+     padding-left: 5px;
+     margin-bottom: 15px;
+ }
+
+ .type_field {
+     width: 30%;
+     height: 30px;
+     border-radius: 10px;
+     margin-left: 2%;
+     border: 0;
+     padding-left: 5px;
+ }
+
+ input:focus,
+ select:focus {
+     outline: none;
+ }
+
+ .value_group {
+    width: 91%;
+ }
+
+ .value_field {
+     width: 85%;
+     height: 28px;
+     margin-top: 10px;
+     border-radius: 10px;
+     border: 0;
+     padding-left: 5%;
+ }
+
+ .create_btn {
+     width: 90px;
+     height: 30px;
+     background-color: white;
+     border: 0;
+     border-radius: 9px;
+     margin-top: 10px;
+     font-size: 13px;
+     font-weight: 500;
+     font-family: "Inter", sans-serif;
+     cursor: pointer;
+ }
+
+ .error_msg {
+     margin: 0;
+     padding: 0;
+     color: rgb(173, 23, 23);
+     font-size: 12px;
+     float: left;
+     margin-left: 5%;
+ }
+
+ .what_to_add_buttons {
+     width: 91%;
+     height: 30px;
+     background-color: transparent;
+     margin-top: 10px;
+     display: flex;
+     justify-content: space-between;
+     font-size: 12px;
+     align-items: center;
+ }
+
+ .what_to_add_buttons button {
+     border: 0;
+     background-color: rgb(225, 233, 236);
+     cursor: pointer;
+     margin: 2px;
+     border-radius: 15px;
+     padding-left: 10px;
+     padding-right: 10px;
+     padding-top: 3px;
+     padding-bottom: 3px;
+ }
+
+ .nested_kv_pair_wrapper {
+     width: 90%;
+     margin-left: 5%;
+     margin-right: 5%;
+     background-color: #bec5db;
+ }

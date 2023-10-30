@@ -1,6 +1,10 @@
 <script lang="ts">
     import type IVariable from "$lib/interfaces/variable_definition_interface";
     import { VariableType } from "$lib/interfaces/variable_definition_interface";
+    import type KVPair from "$lib/models/MKeyValuePair";
+    import type Variable from "$lib/models/MVariable";
+    import MultiValuedVariableCreatePane from "./multi_valued_variable_create_pane.svelte";
+    import SingleValuedVariableCreatePane from "./single_valued_variable_create_pane.svelte";
     import VariableAccordion from "./variable_accordion.svelte";
     import VarialbeCreationPane from "./varialbe_creation_pane.svelte";
 
@@ -9,32 +13,78 @@
         {
             name: "API_KEY",
             type: VariableType.text,
-            value: "1a2B#3C4d$5E6f&7G8h*9I0j",
+            value: ["1a2B#3C4d$5E6f&7G8h*9I0j"],
         },
 
         {
             name: "Phone Number",
             type: VariableType.number,
-            value: 9968916751,
+            value: [9968916751],
+        },
+        {
+            name: "Shopping list",
+            type: VariableType.list,
+            value: [45, 879, 4265],
         },
     ];
 
+
+    let new_variable_instance : IVariable = {
+        name: "",
+        value: undefined,
+        type: VariableType.text,
+    }
+
     let vcpVisible = false;
+    let vlVisible = false;
     function createNewVar() {
         vcpVisible = true;
     }
 
-    function varCreationCallback(vname: string, vtype: VariableType, vvalue: any) {
-        //check the length and type before inserting.
-
+    function afterCreationOrUpdateCallback() {
         vcpVisible = false;
+        vlVisible = false;
+    }
+
+    /**
+     *
+     * IVariable holds list similar to variable. Just inplace of value, we have a list of values.
+     *
+     * KVPair and Variable classes are just to take input.
+     * IVariable interface is the original variable type that can be inserted into db.
+     */
+
+    function createCallback(event: any, passed_variable: Variable | KVPair) {
+        console.log("Callback of variable creation called with event = ", event);
+        if (event != null) {
+
+            //create
+            new_variable_instance.name = passed_variable.name;
+            new_variable_instance.type = passed_variable.type;
+            new_variable_instance.value = passed_variable.value;
+
+            variables.push(new_variable_instance);
+
+            console.log("vars: ", variables)
+
+            afterCreationOrUpdateCallback();
+        }
+    }
+
+    function updateCallback() {
+        afterCreationOrUpdateCallback();
+    }
+
+    function createNewList() {
+        vcpVisible = true;
+        vlVisible = true;
     }
 </script>
 
 <div class="variable_sidebar">
     <div class="vs_header">
-        <h3>Variables</h3>
         <button on:click={createNewVar} class="add_new_var"> + &nbsp;New </button>
+        <button on:click={createNewList} class="add_new_var"> + &nbsp;List</button>
     </div>
 
     <div style="height:30px;" />
@@ -45,7 +95,12 @@
 
     {#if vcpVisible}
         <br />
-        <VarialbeCreationPane callback={varCreationCallback} variableKeyPosition={0} />
+
+        {#if vlVisible}
+            <MultiValuedVariableCreatePane callback={createCallback} _index={0}/>
+        {:else}
+            <SingleValuedVariableCreatePane callback={createCallback} _index={0}/>
+        {/if}
     {/if}
 </div>
 

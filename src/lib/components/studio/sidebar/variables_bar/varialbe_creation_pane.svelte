@@ -4,14 +4,6 @@
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import VarialbeCreationPane from "$lib/components/studio/sidebar/variables_bar/varialbe_creation_pane.svelte";
 
-    let allowedVarTypeNameArray: string[] = []; //allowed variable types are stored in enum. We converted to array.
-    let allowedVarTypeOriginalEnumKeyStr: string[] = [];
-    const typeWithSingleField = [VariableType.text, VariableType.number, VariableType.color, VariableType.file];
-    const typeThatMayHaveKeyValPair = [VariableType.key_value_list, VariableType.list];
-
-    //show error to input field dynamically.
-    let showErrorBorder = { show: false, idx: -1, msg: "Variable name cannot be empty" };
-
     /**
      * Input field values about the newly created variable user want to create will be assigned in the following variables.
      *
@@ -19,12 +11,28 @@
      * By default, we will have only 1 field to enter data. That's what is stored in 'availableFields' var
      *
      */
-    let vNameInput: string = "";
-    let vTypeInput = VariableType.text;
-    let vValueInput: any;
 
-    let availableFields = 1;
-    vValueInput = new Array(availableFields).fill("");
+    export let callback: any; //this function inside variable_tab will create the desired variable.
+    export let isNestedByKeyValueList: boolean = false;
+    export let variableKeyPosition: number; //only for nested keys in key-value pairs.
+    export let vValueInput: any[];
+    export let vNameInput: string = "";
+    export let vTypeInput: VariableType = VariableType.text;
+    export let isUpdateComp: boolean = false;
+
+    let availableFields = vValueInput.length;
+    if (availableFields < 1) {
+        availableFields = 1;
+        vValueInput = new Array(availableFields).fill("");
+    }
+
+    let allowedVarTypeNameArray: string[] = []; //allowed variable types are stored in enum. We converted to array.
+    let allowedVarTypeOriginalEnumKeyStr: string[] = [];
+    const typeWithSingleField = [VariableType.text, VariableType.number, VariableType.color, VariableType.file];
+    const typeThatMayHaveKeyValPair: VariableType[] = [];
+
+    //show error to input field dynamically.
+    let showErrorBorder = { show: false, idx: -1, msg: "Variable name cannot be empty" };
 
     /**
      * onNameChange -> accept changes of variable name and save it.
@@ -37,6 +45,7 @@
         if (isNestedByKeyValueList) {
             //then automatically call callback to store the value.
             //this will store the values without submitting the form
+
             callback(vNameInput, vTypeInput, vValueInput, variableKeyPosition);
         }
     }
@@ -45,19 +54,24 @@
         if (isNestedByKeyValueList) {
             //then automatically call callback to store the value.
             //this will store the values without submitting the form
-            callback(vNameInput, vTypeInput, vValueInput, variableKeyPosition);
+
+            callback(vNameInput, vTypeInput, vValueInput, idx);
         }
     }
     function onSelectChange(e: any) {
-        if (typeThatMayHaveKeyValPair.includes(vTypeInput)) {
-            if (vTypeInput === VariableType.key_value_list) {
-                availableFields = 1;
-                vValueInput = new Array(availableFields).fill(nestedCallbackResult);
-            } else {
-                vValueInput = [];
-                availableFields = 0;
-            }
-        }
+        // if (typeThatMayHaveKeyValPair.includes(vTypeInput)) {
+        //     if (vTypeInput === VariableType.key_value_list) {
+        //         availableFields = 1;
+        //         vValueInput = new Array(availableFields).fill({
+        //             vName: "",
+        //             vtype: VariableType.text,
+        //             vValue: "",
+        //         });
+        //     } else {
+        //         vValueInput = [];
+        //         availableFields = 0;
+        //     }
+        // }
 
         if (typeWithSingleField.includes(vTypeInput)) {
             //whenever user switches to fiels with only single value, delete all the other fields and keep just one.
@@ -111,8 +125,6 @@
             }
         }
 
-        console.log(vValueInput);
-
         callback(vNameInput, vTypeInput, vValueInput);
     }
 
@@ -129,21 +141,17 @@
 
     /**
      * add a single field to the values fields.
+     *
+     * what to add : true -> add value. false -> add key.
      */
-    function addOneField(whatToAdd: boolean = true) {
+    function addOneField(whatToAdd = true) {
         if (whatToAdd) {
-            availableFields++;
-            vValueInput.push("");
+            vValueInput = [...vValueInput, ""];
         } else {
-            //what to add : true -> add value. false -> add key.
-            availableFields++;
-            vValueInput.push(nestedCallbackResult);
+            vValueInput = [...vValueInput, { vName: "", vtype: VariableType.text, vValue: "" }];
         }
+        availableFields = vValueInput.length;
     }
-
-    export let callback: any; //this function inside variable_tab will create the desired variable.
-    export let isNestedByKeyValueList: boolean = false;
-    export let variableKeyPosition: number; //only for nested keys in key-value pairs.
 
     /**
      * If nested component of key-value list,
@@ -151,18 +159,17 @@
      *  The parent will accept it and add to vValueInput list. Code genertor can then interpret.
      *
      */
-    let nestedCallbackResult = { vName: "", vtype: VariableType.text, vValue: null };
+
     function callbackToPassToNested(name: string, vtype: VariableType, vValue: any, idx: number) {
-        nestedCallbackResult.vName = name;
-        nestedCallbackResult.vtype = vtype;
-        nestedCallbackResult.vValue = vValue;
+        const newNestedCallbackResult = {
+            vName: name,
+            vtype: vtype,
+            vValue: vValue,
+        };
 
-        vValueInput[idx] = nestedCallbackResult;
-
-        console.log("Called nested. Pos:", variableKeyPosition);
+        // Update the corresponding state in the array
+        vValueInput[idx] = newNestedCallbackResult;
     }
-
-    console.log("My key position is: ", variableKeyPosition);
 </script>
 
 <div class="var_creation_pane_wrapper" style={isNestedByKeyValueList ? "background-color: #bec5db" : ""}>
@@ -203,18 +210,25 @@
                     {/if}
                 </div>
 
-                <VarialbeCreationPane callback={callbackToPassToNested} isNestedByKeyValueList={true} variableKeyPosition={vf_index} />
+                <VarialbeCreationPane callback={callbackToPassToNested} isNestedByKeyValueList={true} variableKeyPosition={vf_index} vValueInput={[]} />
             </div>
         {:else}
-            <div class="value_input_field_holder_div">
-                <input type="text" class="data_field" placeholder="Value" bind:value on:change={(e) => onValueChange(e, vf_index)} style={showErrorBorder.show && showErrorBorder.idx == vf_index + 1 ? "border: 1px solid rgb(220,0,0)" : ""} />
-                <button class="delete_field_button" on:click={() => deleteValueField(vf_index)}>
-                    <FontAwesomeIcon icon={faTrash} />
-                </button>
-            </div>
-            {#if showErrorBorder.show && showErrorBorder.idx == vf_index + 1}
-                <p class="error_messag">{showErrorBorder.msg}</p>
-            {/if}
+        <div class="value_input_field_holder_div">
+            <input
+                type="text"
+                class="data_field"
+                placeholder="Value"
+                bind:value={vValueInput[vf_index]}
+                on:change={(e) => onValueChange(e, vf_index)}
+                style={showErrorBorder.show && showErrorBorder.idx == vf_index + 1 ? "border: 1px solid rgb(220,0,0)" : ""}
+            />
+            <button class="delete_field_button" on:click={() => deleteValueField(vf_index)}>
+                <FontAwesomeIcon icon={faTrash} />
+            </button>
+        </div>
+        {#if showErrorBorder.show && showErrorBorder.idx == vf_index + 1}
+            <p class="error_messag">{showErrorBorder.msg}</p>
+        {/if}
         {/if}
     {/each}
 
@@ -224,16 +238,18 @@
                 <button class="add_one_more_field_btn" on:click={() => addOneField(false)}><u>+ add 1 key</u></button> <br />
                 <button class="add_one_more_field_btn" on:click={() => addOneField(true)}><u>+ add 1 field</u></button> <br />
             </div>
-        {:else if vTypeInput === VariableType.key_value_list}
-            <button class="add_one_more_field_btn" on:click={() => addOneField(false)}><u>+ add 1 key</u></button> <br />
+        <!-- {:else if vTypeInput === VariableType.key_value_list}
+            <button class="add_one_more_field_btn" on:click={() => addOneField(false)}><u>+ add 1 key</u></button> <br /> -->
         {:else}
             <button class="add_one_more_field_btn" on:click={() => addOneField(true)}><u>+ add 1 field</u></button> <br />
         {/if}
+
+        <!-- <button class="add_one_more_field_btn" on:click={() => addOneField(true)}><u>+ add 1 field</u></button> <br /> -->
     {/if}
 
     {#if !isNestedByKeyValueList}
         <center>
-            <button class="add_new" on:click={varCreated}>Add</button>
+            <button class="add_new" on:click={varCreated}>{isUpdateComp ? "Update" : "Add"}</button>
         </center>
     {/if}
 </div>
