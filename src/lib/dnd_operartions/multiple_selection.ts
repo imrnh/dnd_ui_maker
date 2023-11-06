@@ -1,5 +1,5 @@
 import type ISelectedComponentStatusObject from "$lib/interfaces/i_selected_component_status";
-import type { IPageUIElement } from "$lib/interfaces/page_interfaces";
+import type { IPageUI } from "$lib/interfaces/page_interfaces";
 import type IPage from "$lib/interfaces/page_interfaces";
 
 export default class MultipleSelectionOperations{
@@ -55,7 +55,7 @@ export default class MultipleSelectionOperations{
      *                                     P2
      */
 
-    private get_element_points(element: IPageUIElement, canvas_init_points: Record<string, number>){
+    private get_element_points(element: IPageUI, canvas_init_points: Record<string, number>){
         var x1 = parseInt(element.style.left.split("px")[0]) + Math.floor(canvas_init_points.cx)
         var y1 = parseInt(element.style.top.split("px")[0]) + Math.floor(canvas_init_points.cy)
 

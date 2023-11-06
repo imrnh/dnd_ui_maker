@@ -5,7 +5,7 @@
     import MakeDragRectangle from "$lib/dnd_operartions/generate_drag_rectangle";
     import MultipleSelectionOperations from "$lib/dnd_operartions/multiple_selection";
     import type ISelectedComponentStatusObject from "$lib/interfaces/i_selected_component_status";
-    import type { IPageUIElement } from "$lib/interfaces/page_interfaces";
+    import type { IPageUI } from "$lib/interfaces/page_interfaces";
     import { flip } from "svelte/animate";
 
     let fnc_cnvs_component_clicked: boolean = false;
@@ -64,7 +64,7 @@
         }
 
         //now, calculate the mouse click position relative to the objects that are selected.
-        page.ui_elements.map((element: IPageUIElement) => {
+        page.ui_elements.map((element: IPageUI) => {
             if (fnc_cnvs_selected_components.includes(element.uuid)) {
                 for (let key in fnc_cnvs_selected_components_status) {
                     if (fnc_cnvs_selected_components_status.hasOwnProperty(key)) {
@@ -92,7 +92,7 @@
         if (fnc_cnvs_component_clicked) {
             e.preventDefault();
 
-            page.ui_elements.map((element: IPageUIElement) => {
+            page.ui_elements.map((element: IPageUI) => {
                 for (let key in fnc_cnvs_selected_components_status) {
                     let obj = fnc_cnvs_selected_components_status[key];
                     const x = e.clientX - obj.il + fnc_cnvs_scrollX;

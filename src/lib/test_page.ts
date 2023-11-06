@@ -1,7 +1,7 @@
-import type { IPageSettings, IPageUIElement } from "./interfaces/page_interfaces"
+import type { IPageSettings, IPageUI } from "./interfaces/page_interfaces"
 import type IPage from "./interfaces/page_interfaces"
 
-export const elm_image_1 : IPageUIElement = {
+export const elm_image_1 : IPageUI = {
     uuid: "acdb1",
     tag: "img",
     attributes: {
@@ -21,7 +21,7 @@ export const elm_image_1 : IPageUIElement = {
 }
 
 
-export const elm_image_2 : IPageUIElement =  {
+export const elm_image_2 : IPageUI =  {
     uuid: "acdb2",
     tag: "img",
     attributes: {
@@ -41,7 +41,7 @@ export const elm_image_2 : IPageUIElement =  {
 }
 
 
-export const elm_image_3 : IPageUIElement = {
+export const elm_image_3 : IPageUI = {
     uuid: "acdb3",
     tag: "p",
     attributes: {
