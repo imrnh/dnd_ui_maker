@@ -14,7 +14,9 @@
     import VariableSidebar from "./variables_bar/variable_sidebar.svelte";
 
     let vWindow = 0;
+    
 
+    //used to set cookie for the recently viewed sidebar.
     function setVWToCookie() {
         const cookieName = "sidebarCurrTab";
         const cookieValue = vWindow.toString();

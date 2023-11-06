@@ -1,6 +1,12 @@
+<script>
+    import Modal from "./Modal.svelte";
+    let modal;
+</script>
+
 <html lang="en">
-    <body>
+    <body style="position: fixed;">
         <slot />
+        <Modal bind:this={modal} />
     </body>
 </html>
 
@@ -13,6 +19,7 @@
     body {
         margin: 0;
         font-family: "Inter", sans-serif;
+        position: relative;
     }
 
     *:focus {

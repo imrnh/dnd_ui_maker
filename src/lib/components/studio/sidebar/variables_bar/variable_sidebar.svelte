@@ -7,6 +7,7 @@
     import SingleValuedVariableCreatePane from "./single_valued_variable_create_pane.svelte";
     import VariableAccordion from "./variable_accordion.svelte";
     import VarialbeCreationPane from "./varialbe_creation_pane.svelte";
+    import { show_modal, modal_body } from "$lib/store";
 
     //get all variables from page.
     let variables: IVariable[] = [
@@ -28,17 +29,29 @@
         },
     ];
 
-
-    let new_variable_instance : IVariable = {
+    let new_variable_instance: IVariable = {
         name: "",
         value: undefined,
         type: VariableType.text,
-    }
+    };
 
     let vcpVisible = false;
     let vlVisible = false;
+
+    function modalToggler(pane: any) {
+        show_modal.set(true);
+        modal_body.set(pane);
+    }
+
     function createNewVar() {
         vcpVisible = true;
+        modalToggler(SingleValuedVariableCreatePane);
+    }
+
+    function createNewList() {
+        vcpVisible = true;
+        vlVisible = true;
+        modalToggler(MultiValuedVariableCreatePane);
     }
 
     function afterCreationOrUpdateCallback() {
@@ -57,7 +70,6 @@
     function createCallback(event: any, passed_variable: Variable | KVPair) {
         console.log("Callback of variable creation called with event = ", event);
         if (event != null) {
-
             //create
             new_variable_instance.name = passed_variable.name;
             new_variable_instance.type = passed_variable.type;
@@ -65,7 +77,7 @@
 
             variables.push(new_variable_instance);
 
-            console.log("vars: ", variables)
+            console.log("vars: ", variables);
 
             afterCreationOrUpdateCallback();
         }
@@ -73,11 +85,6 @@
 
     function updateCallback() {
         afterCreationOrUpdateCallback();
-    }
-
-    function createNewList() {
-        vcpVisible = true;
-        vlVisible = true;
     }
 </script>
 
@@ -93,15 +100,15 @@
         <VariableAccordion vname={variable.name} vvalue={variable.value} vtype={variable.type} />
     {/each}
 
-    {#if vcpVisible}
+    <!-- {#if vcpVisible}
         <br />
 
         {#if vlVisible}
-            <MultiValuedVariableCreatePane callback={createCallback} _index={0}/>
+            <MultiValuedVariableCreatePane callback={createCallback} _index={0} />
         {:else}
-            <SingleValuedVariableCreatePane callback={createCallback} _index={0}/>
+            <SingleValuedVariableCreatePane callback={createCallback} _index={0} />
         {/if}
-    {/if}
+    {/if} -->
 </div>
 
 <style>
