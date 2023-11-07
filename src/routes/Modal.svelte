@@ -38,9 +38,9 @@
         transform: translate(-50%, -50%); /* making the div move -50% left and top to its own width and height */
         border-radius: 10px;
         border: 0;
-    box-shadow: -3px 3px 11px 0px rgba(237,237,237,0.25);
--webkit-box-shadow: -3px 3px 11px 0px rgba(237,237,237,0.25);
--moz-box-shadow: -3px 3px 11px 0px rgba(237,237,237,0.25);
+        box-shadow: -3px 3px 11px 0px rgba(237, 237, 237, 0.25);
+        -webkit-box-shadow: -3px 3px 11px 0px rgba(237, 237, 237, 0.25);
+        -moz-box-shadow: -3px 3px 11px 0px rgba(237, 237, 237, 0.25);
     }
     .modal {
         margin: auto auto;

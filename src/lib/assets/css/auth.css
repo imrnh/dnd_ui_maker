@@ -1,0 +1,132 @@
+ @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200;0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;0,6..12,900;0,6..12,1000;1,6..12,200;1,6..12,300;1,6..12,400;1,6..12,500;1,6..12,600;1,6..12,700;1,6..12,800;1,6..12,900;1,6..12,1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+ .auth_page_wrapper {
+     width: 100vw;
+     height: 100vh;
+     position: relative;
+     background-color: rgba(253, 252, 252, 255);
+ }
+
+ .auth_layout {
+     width: 100vw;
+     height: 70px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     font-family: "Poppins", sans-serif;
+     background-color: transparent;
+ }
+
+ .auth_nav {
+     width: 65%;
+     height: 60px;
+     margin-top: 20px;
+     display: flex;
+     align-items: center;
+ }
+
+ .logo_wrapper {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .logo_img {
+     width: 30px;
+     height: 30px;
+ }
+
+ .logo_name {
+     margin-left: 10px;
+     font-size: 17px;
+     font-weight: 500;
+     letter-spacing: 0.01rem;
+     color: rgb(75, 75, 75);
+ }
+
+ .signup_wrapper {
+     width: 350px;
+     height: 500px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     position: fixed;
+     left: 50%;
+     transform: translate(-50%);
+     margin-top: 150px;
+     background-color: transparent;
+ }
+
+ .signup_wrapper h1 {
+     font-size: 50px;
+ }
+
+ .email_input_field {
+     width: 310px;
+     height: 31px;
+     border: 1px solid gainsboro;
+     border-radius: 5px;
+     font-size: 16px;
+     background-color: rgb(245, 245, 245);
+     font-weight: 400;
+     font-family: "Nunito Sans", sans-serif;
+     margin-top: 16px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     padding-left: 10px;
+ }
+
+ input:focus {
+     outline: none;
+ }
+
+ .tos_notice {
+     width: 500px;
+     height: 50px;
+     font-size: 13px;
+     text-align: center;
+     margin-top: 80px;
+     color: darkgray;
+ }
+
+ .tos_notice a {
+     color: gray;
+ }
+
+ .already_have_acc {
+     font-size: 13px;
+     color: darkgray;
+ }
+
+ .already_have_acc a {
+     color: gray;
+ }
+
+ .horizontal_line {
+     width: 320px;
+     height: 0.005rem;
+     background-color: rgb(221, 219, 219);
+     position: absolute;
+     margin-top: 110px;
+ }
+
+ .reset_pass_button {
+     margin-left: -230px;
+     font-size: 12px;
+     text-decoration: none;
+     cursor: pointer;
+     color: gray;
+     background-color: transparent;
+     border: 0;
+     margin-top: 10px;
+     margin-bottom: 15px;
+ }
+
+ .error_message_field{
+    font-size: 13px;
+    margin-top: 7px;
+    color: gray;
+ }

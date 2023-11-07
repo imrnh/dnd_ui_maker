@@ -75,7 +75,7 @@
             }}
         />
         <CanvasMiniButtons
-            button_name="Variable"
+            button_name="Data"
             image={variable_icon}
             button_function={() => {
                 vWindow = 3;

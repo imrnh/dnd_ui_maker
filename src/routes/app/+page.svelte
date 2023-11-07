@@ -1,4 +1,6 @@
 <script>
+    import AllPagesView from "$lib/components/app_info/all_pages_view.svelte";
+
     let apps = [
         {
             uid: "345rsdfsf",
@@ -13,7 +15,9 @@
     <div class="apps_info_wrapper">
         <div class="apps_sidebar">sidebar</div>
 
-        <div class="page_view_section">options</div>
+        <div class="page_view_section">
+            <AllPagesView />
+        </div>
     </div>
 </main>
 
@@ -39,7 +43,8 @@
     }
 
     .page_view_section {
-        max-width: 770px;
+        width: 770px;
         min-height: 100vh;
     }
+
 </style>
