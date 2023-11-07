@@ -19,3 +19,9 @@ export interface IAppSettings {
     homepage: string, //initialRoute in flutter.
     publish_credentials?: (GooglePlayStoreCredentials | AppleStoreCredentials)[],
 }
+
+export interface IAuthState{
+    authenticated: boolean,
+    uid: any,
+    user_name: string | null
+}

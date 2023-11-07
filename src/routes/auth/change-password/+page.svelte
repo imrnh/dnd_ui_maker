@@ -1,8 +1,6 @@
 <script lang="ts">
-    import SignupService from "$lib/api/auth/signup";
+    import SignupService from "$lib/api/auth/signup_service";
     import dummy_logo from "$lib/assets/dummy_logo.png";
-    import google_icon from "$lib/assets/icons/google.png";
-    import facebook_icon from "$lib/assets/icons/facebook.png";
     import AuthButtons from "../AuthButtons.svelte";
 
     var singup_service = new SignupService();

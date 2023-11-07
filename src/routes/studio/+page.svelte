@@ -1,24 +1,51 @@
-<script>
+<script lang="ts">
     import CompCanvas from "$lib/components/studio/canvas/comp_canvas.svelte";
     import FnCanvas from "$lib/components/studio/canvas/fn_canvas.svelte";
     import Uicanvas from "$lib/components/studio/canvas/uicanvas.svelte";
     import Sidebar from "$lib/components/studio/sidebar/sidebar.svelte";
+
+    import { onMount } from "svelte";
+    import { onAuthStateChanged } from "firebase/auth";
+    import { auth } from "$lib/api/auth/firebase";
+    import type { IAuthState } from "$lib/interfaces/root/app_interaface";
+
+    var auth_state: IAuthState = {
+        authenticated: false,
+        uid: null,
+        user_name: null,
+    };
+
+    onMount(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                auth_state.authenticated = true;
+                auth_state.uid = user.uid;
+                auth_state.user_name = user.displayName;
+            } else {
+                auth_state.authenticated = false;
+                auth_state.uid = null;
+                auth_state.user_name = null;
+            }
+        });
+    });
 </script>
 
-<div class="pagebody">
-    <div class="sidebar">
-        <Sidebar />
-    </div>
+{#if auth_state.authenticated}
+    <div class="pagebody">
+        <div class="sidebar">
+            <Sidebar />
+        </div>
 
-    <div class="nav">
-        <!-- Nav content here -->
-    </div>
+        <div class="nav">
+            <!-- Nav content here -->
+        </div>
 
-    <div class="canvas_holder">
-        <Uicanvas />
-        <FnCanvas />
+        <div class="canvas_holder">
+            <Uicanvas />
+            <FnCanvas />
+        </div>
     </div>
-</div>
+{/if}
 
 <style>
     .pagebody {

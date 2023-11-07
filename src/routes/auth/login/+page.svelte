@@ -1,32 +1,22 @@
 <script lang="ts">
-    import SignupService from "$lib/api/auth/signup";
+    import { goto } from '$app/navigation';
     import dummy_logo from "$lib/assets/dummy_logo.png";
     import google_icon from "$lib/assets/icons/google.png";
     import facebook_icon from "$lib/assets/icons/facebook.png";
     import AuthButtons from "../AuthButtons.svelte";
-    /**
-     *
-     * firebase setup
-     */
-    import { initializeApp } from "firebase/app";
-    import { getAnalytics } from "firebase/analytics";
+    import LoginService from "$lib/api/auth/login_service";
+    import type { IAuthState } from '$lib/interfaces/root/app_interaface';
+    import { onMount } from 'svelte';
+    import { onAuthStateChanged } from 'firebase/auth';
+    import { auth } from '$lib/api/auth/firebase';
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyC6-vHmFlnp_gIAo-8PvVDt-zLp_89v7mI",
-        authDomain: "startup-fidget-io.firebaseapp.com",
-        projectId: "startup-fidget-io",
-        storageBucket: "startup-fidget-io.appspot.com",
-        messagingSenderId: "763925514392",
-        appId: "1:763925514392:web:086ca46b931ecb89dc28ed",
-        measurementId: "G-1C3JWMPYBY",
+    var login_service = new LoginService();
+
+     var auth_state: IAuthState = {
+        authenticated: false,
+        uid: null,
+        user_name: null,
     };
-
-    const app = initializeApp(firebaseConfig);
-
-    /**
-     * other logical stuffs
-     */
-    var singup_service = new SignupService();
 
     var email_field_ref;
     var email_value: string = "";
@@ -37,18 +27,35 @@
 
     function email_field_value_capture(e: any) {
         email_value = e.target.value;
-        console.log(email_value);
     }
 
     function password_field_value_capture(e: any) {
         password_value = e.target.value;
         password_reset_request = false;
-        console.log(password_value);
     }
 
     function resetPassword(e: any) {
         password_reset_request = true;
     }
+
+    function modal_message_callback(status_code: number, message: string) {
+        //show modal
+    }
+
+    onMount(()=>{
+         onAuthStateChanged(auth, (user) => {
+            if (user) {
+                auth_state.authenticated = true;
+                auth_state.uid = user.uid;
+                auth_state.user_name = user.displayName;
+                goto("/"); //redirect to home page.
+            } else {
+                auth_state.authenticated = false;
+                auth_state.uid = null;
+                auth_state.user_name = null;
+            }
+        });
+    })
 </script>
 
 <div class="auth_page_wrapper">
@@ -69,9 +76,9 @@
         </div>
 
         {#if !password_reset_request}
-            <AuthButtons buttonName={"Continue with email"} callback={() => singup_service.emailSignup(email_value, password_value)} isRed={true} />
+            <AuthButtons buttonName={"Continue with email"} callback={() => login_service.emailLogin(email_value, password_value, modal_message_callback)} isRed={true} />
         {:else}
-            <AuthButtons buttonName={"Send reset link"} callback={()=>singup_service.sendResetLink(email_value)} isRed={true} />
+            <AuthButtons buttonName={"Send reset link"} callback={() => login_service.sendResetLink(email_value)} isRed={true} />
         {/if}
 
         <button class="reset_pass_button" on:click={resetPassword}>Reset password</button>
@@ -79,8 +86,8 @@
 
         <div class="horizontal_line" style="margin-top: 120px;" />
         <br /><br />
-        <AuthButtons buttonName={"Continue with google"} icon={google_icon} callback={singup_service.emailSignup} />
-        <AuthButtons buttonName={"Continue with facebook"} icon={facebook_icon} callback={singup_service.emailSignup} />
+        <AuthButtons buttonName={"Continue with google"} icon={google_icon} callback={() => login_service.googleLogin(modal_message_callback)} />
+        <AuthButtons buttonName={"Continue with facebook"} icon={facebook_icon} callback={() => login_service.facebookLogin(modal_message_callback)} />
 
         <p class="tos_notice">By clicking “Continue with Email/Google/Facebook” above, you acknowledge that you have read and understood, and agree to Fedjet's <a href="tos">Terms & Conditions</a> and <a href="privacy-policy">Privacy Policy</a></p>
     </div>
