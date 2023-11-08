@@ -1,14 +1,14 @@
 <script lang="ts">
-    import SignupService from "$lib/api/auth/signup_service";
+    import SignupService from "$lib/service/auth/signup_service";
     import dummy_logo from "$lib/assets/dummy_logo.png";
     import google_icon from "$lib/assets/icons/google.png";
     import facebook_icon from "$lib/assets/icons/facebook.png";
     import AuthButtons from "../AuthButtons.svelte";
     import { onMount } from "svelte";
     import { onAuthStateChanged } from "firebase/auth";
-    import { auth } from "$lib/api/auth/firebase";
+    import { auth } from "$lib/service/auth/firebase";
     import type { IAuthState } from "$lib/interfaces/root/app_interaface";
-    import LoginService from "$lib/api/auth/login_service";
+    import LoginService from "$lib/service/auth/login_service";
 
     var singup_service = new SignupService();
     var login_service = new LoginService();

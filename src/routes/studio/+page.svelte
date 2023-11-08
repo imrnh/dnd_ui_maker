@@ -6,8 +6,9 @@
 
     import { onMount } from "svelte";
     import { onAuthStateChanged } from "firebase/auth";
-    import { auth } from "$lib/api/auth/firebase";
+    import { auth } from "$lib/service/auth/firebase";
     import type { IAuthState } from "$lib/interfaces/root/app_interaface";
+    import { getAuth } from "firebase/auth";
 
     var auth_state: IAuthState = {
         authenticated: false,
@@ -16,6 +17,7 @@
     };
 
     onMount(() => {
+        const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 auth_state.authenticated = true;

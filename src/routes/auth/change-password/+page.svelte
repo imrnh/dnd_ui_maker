@@ -1,5 +1,5 @@
 <script lang="ts">
-    import SignupService from "$lib/api/auth/signup_service";
+    import SignupService from "$lib/service/auth/signup_service";
     import dummy_logo from "$lib/assets/dummy_logo.png";
     import AuthButtons from "../AuthButtons.svelte";
 
@@ -25,13 +25,17 @@
     function resetPasswordClicked(e: any) {
         console.log("iN");
         if (password_value === confirm_password_value) {
-            singup_service.resetPassword(password_value);
+            singup_service.resetPassword(password_value, modal_callback);
         } else {
             console.log("Cl");
             confirm_password_field_ref.style.border = "1px solid rgba(210, 97, 97, 0.781)";
             confirm_password_field_ref.style.backgroundColor = "#f1a2a263";
             errorMessage = "Password & Confirm password must match";
         }
+    }
+
+    function modal_callback(ecode : number, emsg: string){
+
     }
 </script>
 

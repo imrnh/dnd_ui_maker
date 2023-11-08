@@ -4,11 +4,11 @@
     import google_icon from "$lib/assets/icons/google.png";
     import facebook_icon from "$lib/assets/icons/facebook.png";
     import AuthButtons from "../AuthButtons.svelte";
-    import LoginService from "$lib/api/auth/login_service";
+    import LoginService from "$lib/service/auth/login_service";
     import type { IAuthState } from '$lib/interfaces/root/app_interaface';
     import { onMount } from 'svelte';
     import { onAuthStateChanged } from 'firebase/auth';
-    import { auth } from '$lib/api/auth/firebase';
+    import { auth } from '$lib/service/auth/firebase';
 
     var login_service = new LoginService();
 

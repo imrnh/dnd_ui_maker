@@ -2,8 +2,8 @@
     import { onMount } from "svelte";
     import page from "$lib/test_page";
     import get_style_string from "$lib/utilities/style_string";
-    import MakeDragRectangle from "$lib/dnd_operartions/generate_drag_rectangle";
-    import MultipleSelectionOperations from "$lib/dnd_operartions/multiple_selection";
+    import MakeDragRectangle from "$lib/service/dnd_operartions/generate_drag_rectangle";
+    import MultipleSelectionOperations from "$lib/service/dnd_operartions/multiple_selection";
     import type ISelectedComponentStatusObject from "$lib/interfaces/i_selected_component_status";
     import type { IPageUI } from "$lib/interfaces/page_interfaces";
     import { flip } from "svelte/animate";

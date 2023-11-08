@@ -1,0 +1,206 @@
+ @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200;0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;0,6..12,900;0,6..12,1000;1,6..12,200;1,6..12,300;1,6..12,400;1,6..12,500;1,6..12,600;1,6..12,700;1,6..12,800;1,6..12,900;1,6..12,1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+ .home_wrapper {
+     width: 100vw;
+     height: 100vh;
+     background-color: rgba(253, 252, 252, 255);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     font-family: "Poppins", sans-serif;
+     overflow: auto;
+ }
+
+ .home_navbar {
+     width: 65%;
+     display: flex;
+     justify-content: flex-end;
+     padding-top: 20px;
+     font-family: "Poppins", sans-serif;
+ }
+
+ .personal_acc_options_btn {
+     width: 200px;
+     height: 40px;
+     font-size: 15px;
+     float: right;
+     cursor: pointer;
+     background-color: transparent;
+     border: 1px solid rgb(148, 147, 147);
+     border-radius: 6px;
+     font-weight: 400;
+     font-family: "Poppins",
+         sans-serif;
+     color: rgb(43, 43, 43);
+ }
+
+ .button_inner_personal_acc_opts {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 40px;
+     margin-top: -2px;
+ }
+
+ .personal_profile_options_wrapper {
+     z-index: 80;
+ }
+
+ .personal_acc_options_holder {
+     width: 200px;
+     height: auto;
+     background-color: rgb(250, 250, 250);
+     box-shadow: 1px 3px 5px -2px rgba(194, 194, 194, 0.8);
+     -webkit-box-shadow: 1px 3px 5px -2px rgba(194, 194, 194, 0.8);
+     -moz-box-shadow: 1px 3px 5px -2px rgba(194, 194, 194, 0.8);
+     z-index: 100;
+     border-radius: 10px;
+ }
+
+ .option_group {
+     display: flex;
+     align-items: center;
+     justify-content: flex-start;
+     margin-top: 5px;
+     width: 190px;
+     height: 30px;
+     padding-left: 10px;
+ }
+
+ .option_group:hover {
+     cursor: pointer;
+     background-color: gray;
+ }
+
+ .logout_button {
+     width: auto;
+     height: auto;
+     font-size: 13px;
+     margin-left: -7px;
+     background-color: transparent;
+     border: 0;
+     margin-top: -5px;
+     font-family: "Poppins", sans-serif;
+ }
+
+ .acc_sett_button {
+     width: auto;
+     height: auto;
+     font-size: 13px;
+     margin-left: -7px;
+     background-color: transparent;
+     margin-top: 10px;
+     border: 0;
+     margin-top: -2px;
+     font-family: "Poppins", sans-serif;
+ }
+
+ .notification_page_view_btn {
+     width: 40px;
+     height: 40px;
+     font-size: 20px;
+     border: 0;
+     background-color: transparent;
+     margin-right: 20px;
+     cursor: pointer;
+ }
+
+ /****
+
+        Project view section
+
+ **/
+ .app_view_section {
+     width: 65%;
+     background-color: transparent;
+     margin-top: 50px;
+ }
+
+ .app_view_body {
+     width: 100%;
+     background-color: transparent;
+ }
+
+ .create_new_app_card {
+     width: 220px;
+     height: 220px;
+     background-color: transparent;
+     border-radius: 10px;
+     margin-top: 40px;
+ }
+
+ .create_new_app_card button {
+     width: 220px;
+     height: 220px;
+     font-size: 23px;
+     font-weight: 300;
+     background-color: transparent;
+     border: 1px solid rgb(68, 68, 68);
+     border-radius: 30px;
+     color: rgb(61, 61, 61);
+     cursor: pointer;
+     font-family: "Poppins", sans-serif;
+     margin-left: 20px;
+ }
+
+ .create_new_app_card p {
+     margin: 0;
+     font-size: 15px;
+ }
+
+ .create_new_app_card button:hover {
+     background-color: rgb(16, 16, 16);
+     border: 0;
+     transition: 300ms;
+     color: white;
+ }
+
+ .app_view_cards_holder {
+     width: 100%;
+    height: auto;
+     display: flex;
+     flex-wrap: wrap;
+     margin-bottom: 100px;
+ }
+
+ .app_view_card {
+     width: 330px;
+     height: 250px;
+     background-color: white;
+     border-radius: 15px;
+     box-shadow: 0px 0px 12px 0px rgba(232, 232, 232, 0.49);
+     -webkit-box-shadow: 0px 0px 12px 0px rgba(232, 232, 232, 0.49);
+     -moz-box-shadow: 0px 0px 12px 0px rgba(232, 232, 232, 0.49);
+     margin-top: 50px;
+     margin-left: 20px;
+     margin-right: 20px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     cursor: pointer;
+ }
+
+ .app_view_card img {
+     width: 90%;
+     height: 170px;
+     border-radius: 15px;
+     margin-top: 10px;
+ }
+
+ .app_title_p {
+     margin-top: 5px;
+     margin-left: 10px;
+     margin-bottom: 0;
+     font-size: 17px;
+     font-weight: 600;
+ }
+
+ .app_last_edited {
+     color: rgb(136, 133, 133);
+     font-size: 13px;
+     margin: 0;
+     margin-top: 5px;
+     margin-bottom: 9px;
+     font-family: "Inter", sans-serif;
+ }
