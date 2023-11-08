@@ -7,10 +7,9 @@ import { onAuthStateChanged } from "firebase/auth";
 export const actions = {
 
     default: async ({ cookies, request }) => {
-
         const data = await request.formData();
-
-        const owner_id = data.get('owner_id') || "";
+        
+        const owner_id = data.get('owner') || "";
         const app_name = data.get('app_name') || "";
         const minimum_age_req_value = data.get('minimum_age_limit') || "";
         const industry_type = data.get('industry_type') || "";

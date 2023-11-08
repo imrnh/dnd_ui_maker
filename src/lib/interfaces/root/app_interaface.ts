@@ -13,6 +13,9 @@ export default interface IApp { //the root to all other interface. This is the m
     volume_storage?: IAppVolumeStorage, //volume storage.
     settings: IAppSettings,
     collaborators?: string[], //uuid of collaborators.
+    minimum_age_requirements: number, //minimum age limit to use the app.
+    industry_type?: string,
+    pricing_plan: string,
 }
 
 export interface IAppSettings {
@@ -20,7 +23,7 @@ export interface IAppSettings {
     publish_credentials?: (GooglePlayStoreCredentials | AppleStoreCredentials)[],
 }
 
-export interface IAuthState{
+export interface IAuthState {
     authenticated: boolean,
     uid: any,
     user_name: string | null
