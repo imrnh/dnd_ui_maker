@@ -67,5 +67,5 @@
 </div>
 
 <style>
-    @import "$lib/assets/css/auth.css";
+    @import "../auth.css";
 </style>

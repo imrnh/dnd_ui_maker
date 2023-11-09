@@ -1,5 +1,5 @@
 <script>
-    import Cmp from "$lib/components/cmp.svelte";
+    import Cmp from "./cmp.svelte";
     let val = [];
 
     function cbc(e, _val, idx){

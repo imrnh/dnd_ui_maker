@@ -58,9 +58,9 @@
             const formData = new FormData(form);
             formData.append("owner", auth_state.uid); // Add custom data to the form data
 
-            
             try {
-                const response = await fetch("/app/create-app", { // Use the Fetch API to submit the form data to the server
+                const response = await fetch("/app/create-app", {
+                    // Use the Fetch API to submit the form data to the server
                     method: "POST",
                     body: formData,
                 });
@@ -129,7 +129,7 @@
 </div>
 
 <style>
-    @import "$lib/assets/css/auth.css";
+    @import "../auth.css";
 
     .app_creation_page_wrapper {
         width: 600px;

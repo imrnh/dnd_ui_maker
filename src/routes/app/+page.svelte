@@ -1,5 +1,5 @@
 <script>
-    import AllPagesView from "$lib/components/app_info/all_pages_view.svelte";
+    import AllPagesView from "./components/all_pages_view.svelte";
 
     let apps = [
         {

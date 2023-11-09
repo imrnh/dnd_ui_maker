@@ -1,18 +1,18 @@
 <script lang="ts">
-    import { goto } from '$app/navigation';
+    import { goto } from "$app/navigation";
     import dummy_logo from "$lib/assets/dummy_logo.png";
     import google_icon from "$lib/assets/icons/google.png";
     import facebook_icon from "$lib/assets/icons/facebook.png";
     import AuthButtons from "../AuthButtons.svelte";
     import LoginService from "$lib/service/auth/login_service";
-    import type { IAuthState } from '$lib/interfaces/root/app_interaface';
-    import { onMount } from 'svelte';
-    import { onAuthStateChanged } from 'firebase/auth';
-    import { auth } from '$lib/service/auth/firebase';
+    import type { IAuthState } from "$lib/interfaces/root/app_interaface";
+    import { onMount } from "svelte";
+    import { onAuthStateChanged } from "firebase/auth";
+    import { auth } from "$lib/service/auth/firebase";
 
     var login_service = new LoginService();
 
-     var auth_state: IAuthState = {
+    var auth_state: IAuthState = {
         authenticated: false,
         uid: null,
         user_name: null,
@@ -42,8 +42,8 @@
         //show modal
     }
 
-    onMount(()=>{
-         onAuthStateChanged(auth, (user) => {
+    onMount(() => {
+        onAuthStateChanged(auth, (user) => {
             if (user) {
                 auth_state.authenticated = true;
                 auth_state.uid = user.uid;
@@ -55,7 +55,7 @@
                 auth_state.user_name = null;
             }
         });
-    })
+    });
 </script>
 
 <div class="auth_page_wrapper">
@@ -94,5 +94,5 @@
 </div>
 
 <style>
-    @import "$lib/assets/css/auth.css";
+    @import "../auth.css";
 </style>

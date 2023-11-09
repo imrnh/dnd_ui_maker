@@ -25,6 +25,8 @@ export default class AppCreatorService {
             minimum_age_requirements: minimum_age,
             industry_type: industry_type,
             pricing_plan: pricing_plan,
+            created_at: new Date(),
+            last_edited: new Date() //initiating with current time.
         }
 
         this.create_database_for_app(owner_id, app.uid);
@@ -90,7 +92,7 @@ export default class AppCreatorService {
     }
 
 
-    private async add_app_to_db(app: IApp){
+    private async add_app_to_db(app: IApp) {
         const database = await Database.getConnectedDatabase();
         const user_collection = database.collection('user');
         const app_collection = database.collection("app");

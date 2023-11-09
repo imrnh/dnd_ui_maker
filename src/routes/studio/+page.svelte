@@ -1,8 +1,8 @@
 <script lang="ts">
-    import CompCanvas from "$lib/components/studio/canvas/comp_canvas.svelte";
-    import FnCanvas from "$lib/components/studio/canvas/fn_canvas.svelte";
-    import Uicanvas from "$lib/components/studio/canvas/uicanvas.svelte";
-    import Sidebar from "$lib/components/studio/sidebar/sidebar.svelte";
+    // import CompCanvas from "./components/studio/canvas/comp_canvas.svelte";
+    import FnCanvas from "./components/canvas/fn_canvas.svelte";
+    import Uicanvas from "./components/canvas/uicanvas.svelte";
+    import Sidebar from "./components/sidebar/sidebar.svelte";
 
     import { onMount } from "svelte";
     import { onAuthStateChanged } from "firebase/auth";

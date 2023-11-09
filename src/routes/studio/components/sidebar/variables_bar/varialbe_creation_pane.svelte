@@ -2,7 +2,7 @@
     import { VariableType } from "$lib/interfaces/variable_definition_interface";
     import { faDeleteLeft, faL, faTrash, faTrashAlt, faTrashCan } from "@fortawesome/free-solid-svg-icons";
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
-    import VarialbeCreationPane from "$lib/components/studio/sidebar/variables_bar/varialbe_creation_pane.svelte";
+    import VarialbeCreationPane from "./varialbe_creation_pane.svelte";
 
     /**
      * Input field values about the newly created variable user want to create will be assigned in the following variables.

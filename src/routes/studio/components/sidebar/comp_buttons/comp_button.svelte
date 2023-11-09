@@ -23,7 +23,7 @@
     <div class="cmb_overlay" />
 </div>
 
-<style>
+<style>signup
     .comp_button_wrapper {
         width: 120px;
         height: 80px;

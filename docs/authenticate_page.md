@@ -1,7 +1,8 @@
 ```
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth } from "$lib/service/auth/firebase";
 import type { IAuthState } from "$lib/interfaces/root/app_interaface";
+
 
     var auth_state: IAuthState = {
         authenticated: false,

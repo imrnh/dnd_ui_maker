@@ -99,5 +99,5 @@
 </div>
 
 <style>
-    @import "$lib/assets/css/studio/variable_sidebar_single_valued.css";
+    @import "../../../css/variable_sidebar_single_valued.css";
 </style>

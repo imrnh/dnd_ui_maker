@@ -129,5 +129,5 @@
 </div>
 
 <style>
-    @import "$lib/assets/css/studio/sidebar.css";
+    @import "../../css/variable_sidebar_multi_valued.css";
 </style>

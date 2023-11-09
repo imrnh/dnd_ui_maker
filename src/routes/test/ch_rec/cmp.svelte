@@ -1,7 +1,7 @@
 <!-- dummy. delete it. it was just for testing. used by @ch_rec +page.svelte -->
 
 <script lang="ts">
-    import Cmp from "$lib/components/cmp.svelte";
+    import Cmp from "./cmp.svelte";
 
     let showCmp: boolean = false;
     let myVal: any[] = [];

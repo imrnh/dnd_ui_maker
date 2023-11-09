@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { ITemplate, ITemplateInfo } from "$lib/api/studio/sidebar/templates/design_templates";
+    import type { ITemplate, ITemplateInfo } from "../../../../../routes/api/studio/sidebar/templates/design_templates";
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faCircleChevronLeft } from "@fortawesome/free-solid-svg-icons";
     import { onMount } from "svelte";

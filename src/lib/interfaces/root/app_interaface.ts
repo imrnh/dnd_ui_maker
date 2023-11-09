@@ -16,6 +16,8 @@ export default interface IApp { //the root to all other interface. This is the m
     minimum_age_requirements: number, //minimum age limit to use the app.
     industry_type?: string,
     pricing_plan: string,
+    created_at: Date,
+    last_edited: Date,
 }
 
 export interface IAppSettings {

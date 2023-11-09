@@ -1,5 +1,5 @@
 <script lang="ts">
-    import templateList, { type ITemplate } from "$lib/api/studio/sidebar/templates/design_templates";
+    import templateList, { type ITemplate } from "../../../../../routes/api/studio/sidebar/templates/design_templates";
     import TemplatesFullView from "./templates_full_view.svelte";
     import TemplatesView from "./templates_view.svelte";
 
@@ -37,7 +37,7 @@
         </div>
     </div>
 {:else}
-    <TemplatesFullView template={templateToFullView} backbtn_callback={callbackFullViewFalse}/>
+    <TemplatesFullView template={templateToFullView} backbtn_callback={callbackFullViewFalse} />
 {/if}
 
 <style>
