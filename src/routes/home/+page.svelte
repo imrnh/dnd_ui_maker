@@ -1,5 +1,5 @@
 <script lang="ts">
-    import dummy_logo from "$lib/assets/dummy_logo.png";
+    import logo from "$lib/assets/dummy_logo.png";
     import { auth } from "$lib/service/auth/firebase";
     import type { IAuthState } from "$lib/interfaces/root/app_interaface";
     import { faAdd, faArrowRightFromBracket, faBell, faCircleChevronDown, faSliders } from "@fortawesome/free-solid-svg-icons";
@@ -68,7 +68,7 @@
 <div class="home_wrapper">
     <div class="home_navbar">
         <div class="logo_wrapper">
-            <img src={dummy_logo} alt="F" class="logo_img" />
+            <img src={logo} alt="F" class="logo_img" />
             <p class="logo_name">Fidjet</p>
         </div>
 
@@ -99,7 +99,6 @@
         </div>
     </div>
 
-    <div class="dick_color" />
     <section class="app_view_section">
         <div class="app_view_header">
             <h1 style="font-size: 40px;">All Apps</h1>
