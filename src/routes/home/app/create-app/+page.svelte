@@ -30,9 +30,9 @@
         industry_type_field_value = e.target.value;
     }
 
-    function modal_message_callback(status_code: number, message: string) { }
+    function modal_message_callback(status_code: number, message: string) {}
 
-    function nextClickHandler() { }
+    function nextClickHandler() {}
 
     var form: any;
 
@@ -78,33 +78,30 @@
     });
 </script>
 
-<div class="auth_page_wrapper"
-    style="display: flex; flex-direction: column; align-items: center; justify-content: center; overflow-y: auto; overflow-x: hidden;">
-    <div class="auth_layout">
-        <div class="auth_nav">
-            <div class="logo_wrapper">
-                <img src={dummy_logo} alt="F" class="logo_img" />
-                <p class="logo_name">Fidjet</p>
-            </div>
-        </div>
-    </div>
+<div class="auth_page_wrapper" style="display: flex; flex-direction: column; align-items: center; justify-content: center; overflow-y: auto; overflow-x: hidden;">
+
 
     <div class="creation_step_visualization_bar">
         <div class="rounded_selected_indicator">1</div>
-        <div class="creation_flow_line"></div>
+        <div class="creation_flow_line" />
         <div class="rounded_unselected_indicator">2</div>
     </div>
-
 
     <div class="app_creation_page_wrapper">
         <h1>Create an app</h1>
         <form method="POST" action="/app/create-app" id="appCreationForm">
             <div class="app_name_input_field_holder">
-                <input type="text" name="app_name" class="email_input_field" bind:this={app_name_field_ref}
-                    value={app_name_value} on:input={app_name_field_value_capture} placeholder="App Name" required />
-                <input type="number" name="minimum_age_limit" class="email_input_field"
-                    bind:this={minimum_age_req_field_ref} value={minimum_age_req_value}
-                    on:input={minimum_age_req_field_value_capture} placeholder="Minimum Age to use the app" required />
+                <input type="text" name="app_name" class="email_input_field" bind:this={app_name_field_ref} value={app_name_value} on:input={app_name_field_value_capture} placeholder="App Name" required />
+                <input
+                    type="number"
+                    name="minimum_age_limit"
+                    class="email_input_field"
+                    bind:this={minimum_age_req_field_ref}
+                    value={minimum_age_req_value}
+                    on:input={minimum_age_req_field_value_capture}
+                    placeholder="Minimum Age to use the app"
+                    required
+                />
 
                 <select name="industry_type" bind:this={industry_type_field_ref} on:change={industry_type_change}>
                     <option>Industry Type (Optional)</option>
@@ -125,8 +122,7 @@
         </form>
 
         <br />
-        <p class="tos_notice">You can change app name, mininmum age, industry type later in the <b>App Dashboard</b>.
-            Please consider selecting an appropiate age based on your app contents.</p>
+        <p class="tos_notice">You can change app name, mininmum age, industry type later in the <b>App Dashboard</b>. Please consider selecting an appropiate age based on your app contents.</p>
     </div>
 </div>
 

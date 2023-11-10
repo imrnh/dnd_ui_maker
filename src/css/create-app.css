@@ -1,127 +1,90 @@
- .auth_layout {
-     width: 100vw;
-     height: 70px;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     font-family: "Poppins", sans-serif;
-     background-color: transparent;
- }
-
- .auth_nav {
-     width: 65%;
-     height: 60px;
-     margin-top: 20px;
-     display: flex;
-     align-items: center;
- }
-
- .logo_wrapper {
-     display: flex;
-     justify-content: center;
-     align-items: center;
- }
-
- .logo_img {
-     width: 30px;
-     height: 30px;
- }
-
- .logo_name {
-     margin-left: 10px;
-     font-size: 17px;
-     font-weight: 500;
-     letter-spacing: 0.01rem;
-     color: rgb(75, 75, 75);
- }
-
- .app_creation_page_wrapper {
-     width: 600px;
-     height: 100%;
-     display: flex;
-     align-items: center;
-     flex-direction: column;
-     margin-top: 80px;
-     position: relative;
- }
-
- .email_input_field {
-     width: 310px;
-     height: 31px;
-     border: 1px solid gainsboro;
-     border-radius: 5px;
-     font-size: 16px;
-     background-color: rgb(245, 245, 245);
-     font-weight: 400;
-     font-family: "Nunito Sans", sans-serif;
-     margin-top: 16px;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     padding-left: 10px;
- }
-
- select {
-     width: 323px;
-     height: 34px;
-     border-radius: 5px;
-     background-color: rgb(245, 245, 245);
-     border: 1px solid gainsboro;
-     font-size: 15px;
-     background-color: rgb(245, 245, 245);
-     font-weight: 400;
-     font-family: "Nunito Sans", sans-serif;
-     color: rgb(117, 117, 117);
-     margin-top: 16px;
-     padding-left: 9px;
- }
-
- select:focus {
-     outline: none;
- }
-
- .continue_creation_button {
-     background-color: black;
-     width: 325px;
-     height: 35px;
-     border: 0;
-     font-family: "Nunito Sans", sans-serif;
-     color: white;
-     font-size: 15px;
-     border-radius: 2px;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     padding-left: 30px;
-     padding-right: 30px;
-     border-radius: 5px;
-     margin-bottom: 20px;
-     cursor: pointer;
- }
-
- .tos_notice {
-     width: 500px;
-     height: 50px;
-     font-size: 13px;
-     text-align: center;
-     margin-top: 80px;
-     color: darkgray;
- }
-
- .tos_notice a {
-     color: gray;
- }
-
- .creation_step_visualization_bar{
+.app_creation_page_wrapper {
+    width: 600px;
+    height: 100%;
     display: flex;
-    height: 80px;
+    align-items: center;
+    flex-direction: column;
     margin-top: 50px;
+    position: relative;
+}
+
+.email_input_field {
+    width: 310px;
+    height: 31px;
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: rgb(245, 245, 245);
+    font-weight: 400;
+    font-family: "Nunito Sans", sans-serif;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 10px;
+}
+
+select {
+    width: 323px;
+    height: 34px;
+    border-radius: 5px;
+    background-color: rgb(245, 245, 245);
+    border: 1px solid gainsboro;
+    font-size: 15px;
+    background-color: rgb(245, 245, 245);
+    font-weight: 400;
+    font-family: "Nunito Sans", sans-serif;
+    color: rgb(117, 117, 117);
+    margin-top: 16px;
+    padding-left: 9px;
+}
+
+select:focus {
+    outline: none;
+}
+
+.continue_creation_button {
+    background-color: black;
+    width: 325px;
+    height: 35px;
+    border: 0;
+    font-family: "Nunito Sans", sans-serif;
+    color: white;
+    font-size: 15px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.tos_notice {
+    width: 500px;
+    height: 50px;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 80px;
+    color: darkgray;
+}
+
+.tos_notice a {
+    color: gray;
+}
+
+.creation_step_visualization_bar {
+    display: flex;
+    height: 200px;
+    margin-top: 100px;
     display: flex;
     align-items: center;
 }
 
- .rounded_selected_indicator, .rounded_unselected_indicator{
+.rounded_selected_indicator,
+.rounded_unselected_indicator {
     width: 70px;
     height: 70px;
     color: white;
@@ -131,20 +94,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
- }
+}
 
- .rounded_selected_indicator{
+.rounded_selected_indicator {
     background-color: rgb(51, 50, 50);
- }
+}
 
-  .rounded_unselected_indicator {
+.rounded_unselected_indicator {
     background-color: transparent;
     border: 1px solid rgb(66, 66, 66);
     color: black;
-  }
+}
 
-  .creation_flow_line{
+.creation_flow_line {
     width: 400px;
     height: 1px;
     background-color: black;
-  }
+}

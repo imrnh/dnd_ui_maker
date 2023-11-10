@@ -48,6 +48,8 @@
         margin: 0;
         font-family: "Inter", sans-serif;
         position: relative;
+        background-color: rgb(255, 252, 252);
+        overflow: auto;
     }
 
     *:focus {
