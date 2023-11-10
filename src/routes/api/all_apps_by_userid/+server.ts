@@ -24,7 +24,6 @@ export async function POST(event) {
     var all_apps;
     if (uid?.toString() != undefined) {
         all_apps = await getAllAppsForUser(uid?.toString());
-        console.log("All apps: ", all_apps)
     }
 
     return new Response(JSON.stringify({ success: true, apps: all_apps }), {

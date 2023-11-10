@@ -94,5 +94,5 @@
 </div>
 
 <style>
-    @import "../auth.css";
+    @import "$css/auth.css";
 </style>

@@ -81,10 +81,9 @@ export default class LoginService {
 
     public logout(callback: any) {
         signOut(auth).then(() => {
-            goto("/")
+            goto("/auth/login");
         }).catch((error) => {
-            callback(error.code, error.message);z
+            callback(error.code, error.message);
         });
-
     }
 }

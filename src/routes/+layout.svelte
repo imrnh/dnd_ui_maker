@@ -1,6 +1,34 @@
-<script>
+<script lang="ts">
     import Modal from "./Modal.svelte";
     let modal;
+
+    import { auth } from "$lib/service/auth/firebase";
+    import type { IAuthState } from "$lib/interfaces/root/app_interaface";
+    import { onMount } from "svelte";
+    import { goto } from "$app/navigation";
+    import { onAuthStateChanged } from "firebase/auth";
+
+    var auth_state: IAuthState = {
+        authenticated: false,
+        uid: null,
+        user_name: "",
+    };
+
+    onMount(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                auth_state.authenticated = true;
+                auth_state.uid = user.uid;
+                auth_state.user_name = user.displayName;
+            } else {
+                auth_state.authenticated = false;
+                auth_state.uid = null;
+                auth_state.user_name = null;
+
+                goto("/auth/login");
+            }
+        });
+    });
 </script>
 
 <html lang="en">
@@ -25,5 +53,4 @@
     *:focus {
         outline: none;
     }
-
 </style>

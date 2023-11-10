@@ -16,6 +16,9 @@ const config = {
 		env: {
 			dir: "./"
 		},
+		alias: {
+			$css: "src/css"
+		}
 	}
 };
 

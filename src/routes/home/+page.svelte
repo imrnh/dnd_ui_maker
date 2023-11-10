@@ -1,20 +1,16 @@
 <script lang="ts">
-    // import { DatabaseClass } from "$lib/server/database/config";
     import dummy_logo from "$lib/assets/dummy_logo.png";
-    import app, { auth } from "$lib/service/auth/firebase";
+    import { auth } from "$lib/service/auth/firebase";
     import type { IAuthState } from "$lib/interfaces/root/app_interaface";
     import { faAdd, faArrowRightFromBracket, faBell, faCircleChevronDown, faSliders } from "@fortawesome/free-solid-svg-icons";
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { onAuthStateChanged } from "firebase/auth";
     import { onMount } from "svelte";
+    import format_last_edited from "$lib/utilities/format_last_edited";
 
-    import app_image from "$lib/assets/images/app-view-cover.png";
     import { goto } from "$app/navigation";
     import type IApp from "$lib/interfaces/root/app_interaface";
-    // import getAllAppsForUser from "$lib/api/app_data/all_app_by_userid";
-
-    let message = "";
-    let responseData;
+    import LoginService from "$lib/service/auth/login_service";
 
     let apps: IApp[] = [];
 
@@ -34,6 +30,7 @@
         const response_data = await response.json();
         if (response_data.success) {
             apps = response_data.apps;
+            apps = apps.reverse(); //to get newly created apps at the top.
         }
     }
 
@@ -61,6 +58,8 @@
                 auth_state.authenticated = false;
                 auth_state.uid = null;
                 auth_state.user_name = null;
+
+                goto("/auth/login");
             }
         });
     });
@@ -92,7 +91,7 @@
                         </div>
                         <div class="option_group">
                             <FontAwesomeIcon style="font-size: 14px; margin-right: 15px;" icon={faArrowRightFromBracket} />
-                            <button class="logout_button">Logout</button>
+                            <button on:click={new LoginService().logout} class="logout_button">Logout</button>
                         </div>
                     </div>
                 {/if}
@@ -116,9 +115,8 @@
                 <a href={`/app?appid=${app.uid}`} style="text-decoration: none; color: black;">
                     <div class="app_view_card">
                         <p class="app_pricing_view_p">{app.pricing_plan}</p>
-                        <!-- <img src={app.cover_img} alt="" /> -->
                         <p class="app_title_p">{app.name}</p>
-                        <p class="app_last_edited">Edited {app.last_edited} hr ago</p>
+                        <p class="app_last_edited">Edited {format_last_edited(app.last_edited)} ago</p>
                     </div>
                 </a>
             {/each}
@@ -127,5 +125,5 @@
 </div>
 
 <style>
-    @import "./home.css";
+    @import "$css/home.css";
 </style>
