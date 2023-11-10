@@ -13,7 +13,7 @@ export default class MultipleSelectionOperations{
         let selected_component_uuids: string[] = []
         let selected_component_status : Record<string, ISelectedComponentStatusObject> = {}
 
-        this.page.ui_elements.map((element, index)=>{
+        this.page.ui.map((element, index)=>{
             const ob_pnts = this.get_element_points(element, canvas_init_points)
 
             const condition_one : boolean = (ob_pnts.x1 <= rec_pnts.a) && (ob_pnts.y1 <= rec_pnts.b) && (ob_pnts.x2 >= rec_pnts.a) && (ob_pnts.y2 >= rec_pnts.b)
@@ -23,15 +23,15 @@ export default class MultipleSelectionOperations{
             //             && (ob_pnts.y1 <= rec_pnts.b) && (ob_pnts.y2 >= rec_pnts.b) && (ob_pnts.y1 <= rec_pnts.d) && (ob_pnts.y2 >= rec_pnts.d)
 
             if(condition_one || condition_two || condition_three){
-                if(!selected_component_uuids.includes(element.uuid)){
-                    selected_component_uuids.push(element.uuid);
+                if(!selected_component_uuids.includes(element.uid)){
+                    selected_component_uuids.push(element.uid);
 
                     const st_obj : ISelectedComponentStatusObject = {
                         idx: index,
                         il: 0,
                         it: 0
                     }
-                    selected_component_status[element.uuid] = st_obj;
+                    selected_component_status[element.uid] = st_obj;
                 }
             }
         })

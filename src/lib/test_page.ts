@@ -2,7 +2,7 @@ import type { IPageSettings, IPageUI } from "./interfaces/page_interfaces"
 import type IPage from "./interfaces/page_interfaces"
 
 export const elm_image_1 : IPageUI = {
-    uuid: "acdb1",
+    uid: "acdb1",
     tag: "img",
     attributes: {
         "src": "https://images.pexels.com/photos/145378/pexels-photo-145378.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -22,7 +22,7 @@ export const elm_image_1 : IPageUI = {
 
 
 export const elm_image_2 : IPageUI =  {
-    uuid: "acdb2",
+    uid: "acdb2",
     tag: "img",
     attributes: {
         "src": "https://images.pexels.com/photos/8149658/pexels-photo-8149658.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -42,7 +42,7 @@ export const elm_image_2 : IPageUI =  {
 
 
 export const elm_image_3 : IPageUI = {
-    uuid: "acdb3",
+    uid: "acdb3",
     tag: "p",
     attributes: {
         "text": "This is paragraph text"
@@ -66,15 +66,15 @@ const page_settings : IPageSettings = {
 
 
 const page : IPage  = {
-    page_uuid: "page_uuid",
+    page_uid: "page_uid",
     page_name: "page_name",
     settings: page_settings,
-    ui_elements: [
+    ui: [
         elm_image_1,
         elm_image_2,
         elm_image_3
     ],
-    functions: [],
+    actions: [],
     variables: [],
 }
 

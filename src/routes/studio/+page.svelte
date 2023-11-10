@@ -1,5 +1,4 @@
 <script lang="ts">
-    // import CompCanvas from "./components/studio/canvas/comp_canvas.svelte";
     import FnCanvas from "./components/canvas/fn_canvas.svelte";
     import Uicanvas from "./components/canvas/uicanvas.svelte";
     import Sidebar from "./components/sidebar/sidebar.svelte";
@@ -8,7 +7,7 @@
     import { onAuthStateChanged } from "firebase/auth";
     import { auth } from "$lib/service/auth/firebase";
     import type { IAuthState } from "$lib/interfaces/root/app_interaface";
-    import { getAuth } from "firebase/auth";
+    import { goto } from "$app/navigation";
 
     var auth_state: IAuthState = {
         authenticated: false,
@@ -16,8 +15,8 @@
         user_name: null,
     };
 
+
     onMount(() => {
-        const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 auth_state.authenticated = true;
@@ -27,9 +26,16 @@
                 auth_state.authenticated = false;
                 auth_state.uid = null;
                 auth_state.user_name = null;
+
+                goto("/auth/login");
             }
         });
     });
+
+    let holder_ref : any;
+
+
+
 </script>
 
 {#if auth_state.authenticated}
@@ -42,9 +48,10 @@
             <!-- Nav content here -->
         </div>
 
-        <div class="canvas_holder">
-            <Uicanvas />
-            <FnCanvas />
+        <div class="canvas_holder" bind:this={holder_ref}>
+            <!-- passing holder reference for counting scroll amount -->
+            <Uicanvas holder_ref={holder_ref}/> 
+            <FnCanvas holder_ref = {holder_ref} />
         </div>
     </div>
 {/if}

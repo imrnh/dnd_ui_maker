@@ -8,6 +8,7 @@
     import type { IPageUI } from "$lib/interfaces/page_interfaces";
     import { flip } from "svelte/animate";
 
+    export let holder_ref : any;
     let component_clicked: boolean = false;
     let canvas_clicked: boolean = false;
     let canvasInitialX: number, canvasInitialY: number;
@@ -15,6 +16,7 @@
         scrollY: number = 0;
 
     let canvas: any = null;
+    let canvas_ref: any;
     let components = [];
     let component_references: any = [];
     let selection_box: any;
@@ -35,7 +37,7 @@
      */
     function canvas_mouse_down(e: any) {
         canvas_clicked = true;
-        selection_box_drawer.setInitials(e, { sx: window.scrollX, sy: window.scrollY }); //get the mouse's initial click position.
+        selection_box_drawer.setInitials(e, { sx: holder_ref.scrollLeft, sy: holder_ref.scrollTop }); //get the mouse's initial click position.
 
         if (canvas_clicked && !component_clicked) {
             //reset the selected_components array.
@@ -64,8 +66,8 @@
         }
 
         //now, calculate the mouse click position relative to the objects that are selected.
-        page.ui_elements.map((element: IPageUI) => {
-            if (selected_components.includes(element.uuid)) {
+        page.ui.map((element: IPageUI) => {
+            if (selected_components.includes(element.uid)) {
                 for (let key in selected_components_status) {
                     if (selected_components_status.hasOwnProperty(key)) {
                         let component_info = selected_components_status[key];
@@ -77,13 +79,13 @@
         });
 
         //get scroll position of windows.
-        scrollX = window.scrollX;
-        scrollY = window.scrollY;
+        scrollX = holder_ref.scrollLeft;
+        scrollY = holder_ref.scrollTop;
     }
 
     function drag(e: any) {
         if (canvas_clicked && !component_clicked) {
-            selection_box.style = selection_box_drawer.draw(e, { sx: window.scrollX, sy: window.scrollY });
+            selection_box.style = selection_box_drawer.draw(e, { sx: holder_ref.scrollLeft, sy: holder_ref.scrollTop });
             let calcualted_elements_and_status = multi_selection_obj.get_selected_items(selection_box_drawer.get_rectangle_points(), { cx: canvasInitialX, cy: canvasInitialY });
             selected_components = calcualted_elements_and_status[0];
             selected_components_status = calcualted_elements_and_status[1];
@@ -92,7 +94,7 @@
         if (component_clicked) {
             e.preventDefault();
 
-            page.ui_elements.map((element: IPageUI) => {
+            page.ui.map((element: IPageUI) => {
                 for (let key in selected_components_status) {
                     let obj = selected_components_status[key];
                     const x = e.clientX - obj.il + scrollX; //as we set the element to move around the canvas, we don't need to subtract the canvasInitialPositions from here.
@@ -102,8 +104,8 @@
                     // component_references[obj.idx].style.top = y + "px";
 
                     //if it have any problem, uncomment the top two line and then comment out this below 2 line.
-                    page.ui_elements[obj.idx].style.left = x - canvasInitialX + "px";
-                    page.ui_elements[obj.idx].style.top = y - canvasInitialY + "px";
+                    page.ui[obj.idx].style.left = x - canvasInitialX + "px";
+                    page.ui[obj.idx].style.top = y - canvasInitialY + "px";
 
                     //call the database's function to update the following object's left and top.
                 }
@@ -129,8 +131,8 @@
      */
 
     function load_scroll_amount() {
-        scrollX = window.scrollX;
-        scrollY = window.scrollY;
+        scrollX = holder_ref.scrollLeft;
+        scrollY = holder_ref.scrollTop;
     }
 
     function get_canvas_intial_position() {
@@ -142,7 +144,7 @@
         let index = 0;
         // for(let key in selected_components_status){
         //     let el_idx = selected_components_status[key].idx
-        //     page.ui_elements[el_idx].style.border = "0px"
+        //     page.ui[el_idx].style.border = "0px"
         //     index++;
         // }
     }
@@ -157,52 +159,57 @@
         });
 
         get_canvas_intial_position();
-        load_scroll_amount();
+        // load_scroll_amount();
 
         //set initial loading positon for components with scroll amount. and then attach the event listeners.
 
         components.forEach((component, index) => {
             component.addEventListener("mousedown", (e) => {
-                handle_start_dragging(e, page.ui_elements[index].uuid, index);
+                handle_start_dragging(e, page.ui[index].uid, index);
             });
         });
 
         let canvasWrapper = document.getElementById("canvas");
 
-        canvasWrapper.addEventListener("mousedown", canvas_mouse_down);
-        canvasWrapper.addEventListener("mousemove", drag);
-        canvasWrapper.addEventListener("mouseup", handle_stop_dragging);
+        canvasWrapper?.addEventListener("mousedown", canvas_mouse_down);
+        canvasWrapper?.addEventListener("mousemove", drag);
+        canvasWrapper?.addEventListener("mouseup", handle_stop_dragging);
     });
+    function handleScroll(e: any){
+        console.log(e);
+    }
 </script>
 
-<main>
-    <div id="canvas">
+<main> 
+    <div id="canvas" bind:this={canvas_ref}>
         <div id="select_rectangle" bind:this={selection_box} />
-        {#each page.ui_elements as element}
-            {#if element.tag == "img"}
-                <img
-                    bind:this={component_references[component_references.length]}
-                    src={element.attributes.src.toString()}
-                    alt={element.attributes.alt.toString()}
-                    style={`left: ${parseInt(element.style.left) + Math.floor(canvasInitialX) || "0"}px;  top: ${parseInt(element.style.top) + Math.floor(canvasInitialY) || "0"}px; border: ${
-                        selected_components.includes(element.uuid) ? "3px solid #7f00ff" : element.style.border
-                    }; ${get_style_string(element.style)}`}
-                    id="component"
-                />
-            {:else if element.tag == "p"}
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-                <p
-                    bind:this={component_references[component_references.length]}
-                    id="component"
-                    style={`left: ${parseInt(element.style.left) + Math.floor(canvasInitialX) || "0"}px;  top: ${parseInt(element.style.top) + Math.floor(canvasInitialY) || "0"}px; border: ${
-                        selected_components.includes(element.uuid) ? "3px solid #7f00ff" : element.style.border
-                    }; ${get_style_string(element.style)}`}
-                >
-                    {element.attributes.text}
-                </p>
-            {/if}
-        {/each}
+        {#if page.ui}
+            {#each page.ui as element}
+                {#if element.tag == "img"}
+                    <img
+                        bind:this={component_references[component_references.length]}
+                        src={element.attributes.src.toString()}
+                        alt={element.attributes.alt.toString()}
+                        style={`left: ${parseInt(element.style.left) + Math.floor(canvasInitialX) || "0"}px;  top: ${parseInt(element.style.top) + Math.floor(canvasInitialY) || "0"}px; border: ${
+                            selected_components.includes(element.uid) ? "3px solid #7f00ff" : element.style.border
+                        }; ${get_style_string(element.style)}`}
+                        id="component"
+                    />
+                {:else if element.tag == "p"}
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+                    <p
+                        bind:this={component_references[component_references.length]}
+                        id="component"
+                        style={`left: ${parseInt(element.style.left) + Math.floor(canvasInitialX) || "0"}px;  top: ${parseInt(element.style.top) + Math.floor(canvasInitialY) || "0"}px; border: ${
+                            selected_components.includes(element.uid) ? "3px solid #7f00ff" : element.style.border
+                        }; ${get_style_string(element.style)}`}
+                    >
+                        {element.attributes.text}
+                    </p>
+                {/if}
+            {/each}
+        {/if}
     </div>
 </main>
 

@@ -52,6 +52,11 @@
         overflow: auto;
     }
 
+    :global(*) :global(:focus),
+    :global(*) :global(:hover) {
+        outline: none;
+    }
+
     *:focus {
         outline: none;
     }

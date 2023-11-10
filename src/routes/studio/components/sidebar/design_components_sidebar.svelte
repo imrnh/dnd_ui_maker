@@ -61,5 +61,5 @@
 </div>
 
 <style>
-    @import "../../css/sidebar_ui_action_comps.css";
+    @import "$css/studio/sidebar_ui_action_comps.css";
 </style>
