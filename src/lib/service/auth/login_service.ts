@@ -1,6 +1,7 @@
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, signOut } from "firebase/auth";
 import app, { auth } from "./firebase";
 import { goto } from '$app/navigation';
+import setHttpOnlyCookie from "$lib/utilities/set_httponly_cookie";
 
 export default class LoginService {
     public emailLogin(email: string, password: string, callback: any) {
@@ -81,8 +82,10 @@ export default class LoginService {
 
     public logout(callback: any) {
         signOut(auth).then(() => {
+            setHttpOnlyCookie("Authorization", "", 0);
             goto("/auth/login");
         }).catch((error) => {
+            setHttpOnlyCookie("Authorization", "", 0);
             callback(error.code, error.message);
         });
     }

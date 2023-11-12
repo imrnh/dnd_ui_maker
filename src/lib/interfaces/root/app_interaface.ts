@@ -8,6 +8,8 @@ export default interface IApp { //the root to all other interface. This is the m
     api_root: string, //a api route that the project will use to communicate with the server. If not paid subscription fee, this api function can discard the request. Otherwise, it will be the gateway to access any api thing.
     name: string,
     description: string,
+    logo_path : string, //the app logo that will be used in production.
+    comapny_url: string, //the package name. //must be unique.
     pages: IPage[],
     database?: IAppDatabase, //database credentials for mongodb. We will set a new database for the user.
     volume_storage?: IAppVolumeStorage, //volume storage.

@@ -175,14 +175,15 @@
         canvasWrapper?.addEventListener("mousemove", drag);
         canvasWrapper?.addEventListener("mouseup", handle_stop_dragging);
     });
-    function handleScroll(e: any){
-        console.log(e);
+
+    function handleDrop(e: any){
+        console.log("Drop")
     }
 </script>
 
 <main> 
-    <div id="canvas" bind:this={canvas_ref}>
-        <div id="select_rectangle" bind:this={selection_box} />
+    <div id="canvas" bind:this={canvas_ref} on:drop={handleDrop} on:dragover={handleDrop} role="application" aria-label="Drop Area" draggable={true} dropzone={true}>
+        <div id="select_rectangle" bind:this={selection_box}/>
         {#if page.ui}
             {#each page.ui as element}
                 {#if element.tag == "img"}
